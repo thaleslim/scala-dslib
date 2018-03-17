@@ -1,11 +1,11 @@
 package br.unb.cic.ed
 
 /**
-  * Uma implementacao do tipo lista usando 
-  * alocacao sequencial (um array de elementos). 
-  * 
+  * Uma implementacao do tipo lista usando
+  * alocacao sequencial (um array de elementos).
+  *
   * @author: rbonifacio
-  */ 
+  */
 class ArrayList(private val max: Int = 10) extends List {
 
   private var _size = 0;
@@ -44,7 +44,15 @@ class ArrayList(private val max: Int = 10) extends List {
   }
 
   def remove(pos: Int): Unit = {
-    //TODO: exercise
+    if(pos >= 0 && pos <= _size) {
+      if(pos != _size-1){
+        for(index <- pos until (_size-1)){
+          elements(index) = elements(index+1)
+        }
+      }
+      _size -= 1
+    }
+    else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
   def size(): Int = _size
