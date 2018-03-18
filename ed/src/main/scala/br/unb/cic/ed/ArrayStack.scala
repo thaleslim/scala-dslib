@@ -1,10 +1,10 @@
 package br.unb.cic.ed
 
 /**
-  * Uma implementacao do tipo lista usando
+  * Uma implementacao do tipo pilha usando
   * alocacao sequencial (um array de elementos).
   *
-  * @author: rbonifacio
+  * @author: thaleslim
   */
 class ArrayStack(private val max: Int = 10) extends Stack {
 
