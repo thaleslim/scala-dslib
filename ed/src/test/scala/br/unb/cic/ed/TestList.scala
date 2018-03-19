@@ -11,7 +11,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
   it should "have size == 0 before inserting any element" in {
     val list = new br.unb.cic.ed.ArrayList()
 
-    list.size() should be (0) 
+    list.size() should be (0)
   }
 
   it should "have size == 3 after inserting three elements" in {
@@ -21,7 +21,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
     list.insert(1, 6)
     list.insert(2, 7)
 
-    list.size() should be (3) 
+    list.size() should be (3)
   }
 
   it should "should keep the list of inserted values" in {
@@ -34,7 +34,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
     list.size() should be (3)
     list.elementAt(0) should be (Some(1))
     list.elementAt(1) should be (Some(2))
-    list.elementAt(2) should be (Some(3)) 
+    list.elementAt(2) should be (Some(3))
   }
 
   it should "return Some(1) when we call find(1000) in the list [100, 1000, 10000]" in {
@@ -62,7 +62,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
     list.insert(2, 3)
 
     intercept[InvalidArgument] {
-      list.insert(4,4) 
+      list.insert(4,4)
     }
 
   }
@@ -81,5 +81,24 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
     list.elementAt(1) should be (Some(20))
     list.elementAt(2) should be (Some(30))
     list.elementAt(3) should be (Some(40))
+  }
+
+  it should "have size == 2 and shift the elements after removing a element of a list. that is [1,2,88,3].remove(2) = [1,2,3]" in {
+    val list = new br.unb.cic.ed.ArrayList()
+
+    list.insert(0,  1)
+    list.insert(1,  2)
+    list.insert(2, 88)
+    list.insert(3,  3)
+
+    list.size() should be (4)
+
+    list.remove(2)
+
+    list.elementAt(0) should be (Some(1))
+    list.elementAt(1) should be (Some(2))
+    list.elementAt(2) should be (Some(3))
+
+    list.size() should be (3)
   }
 }
