@@ -12,7 +12,7 @@ class ArrayList(private val max: Int = 10) extends List {
   private var elements = Array.ofDim[Int](max)
 
   def insert(pos: Int, value: Int): Unit = {
-    if(pos >= 0 && pos <= _size) {
+    if(pos >= 0 && pos <= _size && pos < max) {
       if(pos == _size) {
         elements(pos) = value
       }
@@ -44,7 +44,7 @@ class ArrayList(private val max: Int = 10) extends List {
   }
 
   def remove(pos: Int): Unit = {
-    if(pos >= 0 && pos <= _size) {
+    if(pos >= 0 && pos < _size) {
       if(pos != _size-1){
         for(index <- pos until (_size-1)){
           elements(index) = elements(index+1)

@@ -1,8 +1,8 @@
 package br.unb.cic.ed
 
 /**
-  * Uma especifica\c c\~{a}o do tipo pilha
-  * usando a constru\c c\~{a}o trait da linguagem
+  * Uma especificação do tipo pilha
+  * usando a construção trait da linguagem
   * Scala.
   *
   * @author thaleslim
@@ -10,5 +10,6 @@ package br.unb.cic.ed
 trait Stack {
   def push(value: Int): Unit
   def pop(): Option[Int]
-  def size() : Int
+  def top(): Option[Int] 
+  def size(): Int
 }

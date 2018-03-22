@@ -101,4 +101,32 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen {
 
     list.size() should be (3)
   }
+
+  it should "have the value [10, 30] after removing the second element (idx = 1) in the list [10, 20, 30]" in {
+    val list = new br.unb.cic.ed.ArrayList()
+
+    list.insert(0, 10)
+    list.insert(1, 20)
+    list.insert(2, 30)
+
+    list.remove(1)
+
+    list.size() should be (2)
+
+    list.elementAt(0) should be (Some(10))
+    list.elementAt(1) should be (Some(30)) 
+  }
+
+  it should "the value 30 should not appear after removing the third element (idx = 2) in the list [10, 20, 30]" in {
+    val list = new br.unb.cic.ed.ArrayList()
+
+    list.insert(0, 10)
+    list.insert(1, 20)
+    list.insert(2, 30)
+
+    intercept[InvalidArgument] {
+       list.remove(3)
+    }    
+  }
+
 }
