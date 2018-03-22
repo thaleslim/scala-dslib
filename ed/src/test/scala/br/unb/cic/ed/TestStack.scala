@@ -11,9 +11,6 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
 
   var stack : br.unb.cic.ed.Stack = _
 
-  before {
-    stack = new br.unb.cic.ed.StackImpl(new ArrayList())
-  }
 
   it should "have size == 0 before stacking any element" in {
     stack.size() should be (0)
@@ -61,6 +58,10 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
     intercept[InvalidArgument] {
       smallStack.push(1)
     }
+  }
+
+  before {
+    stack = new br.unb.cic.ed.StackImpl(new ArrayList())
   }
 
 }
