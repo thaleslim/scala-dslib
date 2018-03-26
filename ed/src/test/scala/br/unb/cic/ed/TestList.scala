@@ -9,11 +9,11 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
 
   behavior of "A List"
 
-  var list: br.unb.cic.ed.List = _ 
+  var list: br.unb.cic.ed.List[Int] = _ 
 
   before {
 //    list = new br.unb.cic.ed.ArrayList()
-    list = new br.unb.cic.ed.LinkedList()
+    list = new br.unb.cic.ed.LinkedList[Int]()
 
   }
 

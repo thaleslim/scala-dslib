@@ -6,12 +6,12 @@ package br.unb.cic.ed
   *
   * @author: rbonifacio
   */
-class ArrayList(private val max: Int = 10) extends List {
+class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
 
   private var _size = 0;
-  private var elements = Array.ofDim[Int](max)
+  private var elements = Array.ofDim[T](max)
 
-  def insert(pos: Int, value: Int): Unit = {
+  def insert(pos: Int, value: T): Unit = {
     if(pos >= 0 && pos <= _size && pos < max) {
       if(pos == _size) {
         elements(pos) = value
@@ -27,14 +27,14 @@ class ArrayList(private val max: Int = 10) extends List {
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
-  def elementAt(pos: Int): Option[Int] = {
+  def elementAt(pos: Int): Option[T] = {
     if(pos >= 0 && pos < _size) {
       return Some(elements(pos))
     }
     return None
   }
 
-  def find(value: Int): Option[Int] = {
+  def find(value: T): Option[Int] = {
     for(idx <- 0 until _size) {
       if(value == elements(idx)) {
         return Some(idx)

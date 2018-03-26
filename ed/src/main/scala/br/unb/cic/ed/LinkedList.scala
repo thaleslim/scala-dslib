@@ -1,16 +1,16 @@
 package br.unb.cic.ed
 
 
-case class NodeList(val value: Integer, var next: NodeList)
+case class NodeList[T](val value: T, var next: NodeList[T])
 
-class LinkedList extends List {
+class LinkedList[T] extends List[T] {
 
   private var _size: Int = 0 
-  private var head: NodeList = null
+  private var head: NodeList[T] = null
 
   def size(): Int = _size
 
-  private def nodeAtPosition(pos: Int): NodeList = {
+  private def nodeAtPosition(pos: Int): NodeList[T] = {
     var it = head
     for(i <- 0 until pos) {
       it = it.next
@@ -18,7 +18,7 @@ class LinkedList extends List {
     return it
   }
 
-  def find(value: Int): Option[Int] = {
+  def find(value: T): Option[Int] = {
     if(size == 0) { return None }
     var it = head
     var idx = 0
@@ -32,7 +32,7 @@ class LinkedList extends List {
     return None
   }
 
-  def elementAt(pos: Int): Option[Int] = {
+  def elementAt(pos: Int): Option[T] = {
     if(pos < 0 || pos > _size) {
       return None
     }
@@ -40,7 +40,7 @@ class LinkedList extends List {
     return Some(node.value)
   }
 
-  def insert(pos: Int, value: Int){
+  def insert(pos: Int, value: T){
     if(pos >=0 && pos <= _size) {
       if(pos == 0) {
         head = NodeList(value, head) 

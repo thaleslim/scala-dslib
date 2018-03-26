@@ -9,7 +9,7 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
 
   behavior of "A Stack"
 
-  var stack : br.unb.cic.ed.Stack = _
+  var stack : br.unb.cic.ed.Stack[Int] = _
 
 
   it should "have size == 0 before stacking any element" in {
@@ -51,7 +51,7 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
   }
 
   it should "throw InvalidArgument when we call push(1) on an full stack" in {
-    val smallStack = new br.unb.cic.ed.StackImpl(new ArrayList(1))
+    val smallStack = new br.unb.cic.ed.StackImpl[Int](new ArrayList[Int](1))
 
     smallStack.push(1)
 
@@ -61,7 +61,7 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
   }
 
   before {
-    stack = new br.unb.cic.ed.StackImpl(new ArrayList())
+    stack = new br.unb.cic.ed.StackImpl[Int](new ArrayList[Int]())
   }
 
 }

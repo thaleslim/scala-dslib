@@ -4,18 +4,18 @@ package br.unb.cic.ed
   * Uma implementacao do tipo pilha usando
   * alocacao sequencial (um array de elementos).
   *
-  * @author: thaleslim
+  * @author: thaleslim / rbonifacio
   */
-class StackImpl(private val elements: br.unb.cic.ed.List) extends Stack {
+class StackImpl[T](private val elements: br.unb.cic.ed.List[T]) extends Stack[T] {
 
   private var _size = 0
 
-  def push(value: Int): Unit = {
+  def push(value: T): Unit = {
     elements.insert(_size, value)
     _size += 1
   }
 
-  def pop(): Option[Int] = {
+  def pop(): Option[T] = {
     val res = elements.elementAt(_size-1)
     res match {
       case Some(v) => {
@@ -27,7 +27,7 @@ class StackImpl(private val elements: br.unb.cic.ed.List) extends Stack {
     return res
   }
 
-  def top(): Option[Int] = elements.elementAt(_size-1)
+  def top(): Option[T] = elements.elementAt(_size-1)
 
   def size() : Int = _size
 }

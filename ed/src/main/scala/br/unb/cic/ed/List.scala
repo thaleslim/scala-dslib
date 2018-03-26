@@ -7,10 +7,10 @@ package br.unb.cic.ed
   * 
   * @author rbonifacio
   */ 
-trait List {
-  def find(value: Int): Option[Int]
-  def elementAt(pos: Int): Option[Int]
-  def insert(pos: Int, value: Int) : Unit
+trait List[T] {
+  def find(value: T): Option[Int]
+  def elementAt(pos: Int): Option[T]
+  def insert(pos: Int, value: T) : Unit
   def remove(pos: Int) : Unit
   def size() : Int
 }

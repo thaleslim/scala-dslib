@@ -7,9 +7,9 @@ package br.unb.cic.ed
   *
   * @author thaleslim
   */
-trait Stack {
-  def push(value: Int): Unit
-  def pop(): Option[Int]
-  def top(): Option[Int] 
+trait Stack[T] {
+  def push(value: T): Unit
+  def pop(): Option[T]
+  def top(): Option[T] 
   def size(): Int
 }
