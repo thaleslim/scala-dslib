@@ -13,4 +13,5 @@ trait List[T] {
   def insert(pos: Int, value: T) : Unit
   def remove(pos: Int) : Unit
   def size() : Int
+  def addAll[B <: T](values: List[B]): Unit
 }

@@ -5,12 +5,14 @@ import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
+
 class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
   behavior of "A Stack"
 
   var stack : br.unb.cic.ed.Stack[Int] = _
 
+  
 
   it should "have size == 0 before stacking any element" in {
     stack.size() should be (0)

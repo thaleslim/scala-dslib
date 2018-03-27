@@ -5,6 +5,18 @@ import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
+trait FiguraGeometrica {
+  def area(): Double
+}
+
+case class Circulo(val r: Double) extends FiguraGeometrica {
+  override def area(): Double = r * r * 3.14
+}
+
+case class Retangulo(val b: Double, a: Double) extends FiguraGeometrica {
+  override def area(): Double = b * a 
+}
+
 class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
   behavior of "A List"
@@ -12,9 +24,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   var list: br.unb.cic.ed.List[Int] = _ 
 
   before {
-//    list = new br.unb.cic.ed.ArrayList()
     list = new br.unb.cic.ed.LinkedList[Int]()
-
   }
 
   it should "have size == 0 before inserting any element" in {
@@ -25,7 +35,7 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
     list.insert(0, 5)
 
     list.size() should be (1)
-    list.elementAt(0) should be (Some(5)) 
+    list.elementAt(0) should be (Some(5))
   }
 
   it should "have size == 3 after inserting three elements" in {
@@ -125,4 +135,43 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
     }    
   }
 
+  it should "lead to a list [3,4,5,6,7,8] when we call [3, 4, 5].addAll([6, 7, 8])" in {
+    val list1 = new br.unb.cic.ed.ArrayList[Int](6)
+    val list2 = new br.unb.cic.ed.ArrayList[Int]()
+
+    list1.insert(0, 3)
+    list1.insert(1, 4)
+    list1.insert(2, 5)
+
+    list2.insert(0, 6)
+    list2.insert(1, 7)
+    list2.insert(2, 8)
+
+    list1.addAll(list2)
+
+    list1.size should be (6)
+    list2.size should be (3)
+
+    list1.elementAt(5) should be (Some(8)) 
+  }
+
+  it should "lead to a list of [c1, r1, c2, c3, c4] when we call [c1, r1, c2].addAll[c3, c4]]" in {
+    val list1 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
+    val list2 = new br.unb.cic.ed.ArrayList[Circulo]()
+
+    list1.insert(0, Circulo(3.5))
+    list1.insert(1, Retangulo(3.0, 2.0))
+    list1.insert(2, Circulo(4.0))
+
+    list1.size should be (3) 
+
+    list2.insert(0, Circulo(10))
+    list2.insert(1, Circulo(30))
+
+    list2.size should be (2)
+
+    list1.addAll(list2)
+
+    list1.size() should be (5)
+  }
 }

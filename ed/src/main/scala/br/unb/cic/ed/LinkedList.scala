@@ -69,4 +69,8 @@ class LinkedList[T] extends List[T] {
     }
     _size -= 1
   }
+
+  def addAll[B <: T](values: List[B]) : Unit = {
+    throw InvalidArgument("not implemented yet") 
+  }
 }

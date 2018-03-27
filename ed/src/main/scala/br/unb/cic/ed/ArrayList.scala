@@ -56,4 +56,18 @@ class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
   }
 
   def size(): Int = _size
+
+  def addAll[B <: T](values: List[B]): Unit = {
+    if(values.size() + _size > max) {
+      throw new InvalidArgument("overflow!!!")
+    }
+
+    for(i <- 0 until values.size()) {
+      values.elementAt(i) match {
+        case Some(v) => insert(_size, v)
+        case _       => throw new InvalidArgument("ooops..... unexpected")
+      }
+    }
+  }
+
 }
