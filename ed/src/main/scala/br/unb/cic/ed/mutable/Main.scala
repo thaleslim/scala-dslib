@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 object ProgramaPrincipal {
   def main(args: Array[String]) {

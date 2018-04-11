@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 /**
   * Uma especifica\c c\~{a}o do tipo lista 

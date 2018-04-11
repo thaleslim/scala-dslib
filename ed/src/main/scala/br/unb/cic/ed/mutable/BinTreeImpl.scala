@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 class NodeTree[T <: Comparable[T]](val content: T, var lhs: NodeTree[T] = null, var rhs: NodeTree[T] = null) {
 

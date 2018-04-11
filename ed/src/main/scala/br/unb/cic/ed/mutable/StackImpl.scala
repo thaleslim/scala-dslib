@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 /**
   * Uma implementacao do tipo pilha usando
@@ -6,7 +6,7 @@ package br.unb.cic.ed
   *
   * @author: thaleslim / rbonifacio
   */
-class StackImpl[T](private val elements: br.unb.cic.ed.List[T]) extends Stack[T] {
+class StackImpl[T](private val elements: br.unb.cic.ed.mutable.List[T]) extends Stack[T] {
 
   private var _size = 0
 

@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
@@ -22,10 +22,10 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
 
   behavior of "A List"
 
-  var list: br.unb.cic.ed.List[Int] = _ 
+  var list: br.unb.cic.ed.mutable.List[Int] = _ 
 
   before {
-    list = new br.unb.cic.ed.LinkedList[Int]()
+    list = new br.unb.cic.ed.mutable.LinkedList[Int]()
   }
 
   it should "have size == 0 before inserting any element" in {
@@ -137,8 +137,8 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 
   it should "lead to a list [3,4,5,6,7,8] when we call [3, 4, 5].addAll([6, 7, 8])" in {
-    val list1 = new br.unb.cic.ed.ArrayList[Int](6)
-    val list2 = new br.unb.cic.ed.ArrayList[Int]()
+    val list1 = new br.unb.cic.ed.mutable.ArrayList[Int](6)
+    val list2 = new br.unb.cic.ed.mutable.ArrayList[Int]()
 
     list1.insert(0, 3)
     list1.insert(1, 4)
@@ -157,9 +157,9 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 
   it should "lead to a list of [c1, r1, c2, c3, c4] when we call [c1, r1, c2].addAll[c3, c4]]" in {
-    var list1 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
-    var list2 = new br.unb.cic.ed.ArrayList[Circulo]()
-    var list3 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
+    var list1 = new br.unb.cic.ed.mutable.ArrayList[FiguraGeometrica]()
+    var list2 = new br.unb.cic.ed.mutable.ArrayList[Circulo]()
+    var list3 = new br.unb.cic.ed.mutable.ArrayList[FiguraGeometrica]()
 
     list1.insert(0, Circulo(3.5))
     list1.insert(1, Retangulo(3.0, 2.0))

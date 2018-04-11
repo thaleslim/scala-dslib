@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 
 case class NodeList[T](val value: T, var next: NodeList[T])
@@ -52,13 +52,13 @@ class LinkedList[T] extends List[T] {
       _size += 1
     }
     else {
-      throw br.unb.cic.ed.InvalidArgument()
+      throw br.unb.cic.ed.mutable.InvalidArgument()
     }
   }
 
   def remove(pos: Int): Unit = {
     if(pos < 0 || pos >= size) {
-      throw br.unb.cic.ed.InvalidArgument()
+      throw br.unb.cic.ed.mutable.InvalidArgument()
     }
     if(pos == 0) {
       head = head.next

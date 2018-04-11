@@ -1,4 +1,4 @@
-package br.unb.cic.ed
+package br.unb.cic.ed.mutable
 
 
 final case class InvalidArgument(private val message: String = "",
