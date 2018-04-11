@@ -7,6 +7,7 @@ import org.scalatest.BeforeAndAfter
 
 trait FiguraGeometrica {
   def area(): Double
+//  override def compareTo(that: FiguraGeometrica) = this.area().compareTo(that.area())
 }
 
 case class Circulo(val r: Double) extends FiguraGeometrica {
@@ -156,8 +157,9 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 
   it should "lead to a list of [c1, r1, c2, c3, c4] when we call [c1, r1, c2].addAll[c3, c4]]" in {
-    val list1 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
-    val list2 = new br.unb.cic.ed.ArrayList[Circulo]()
+    var list1 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
+    var list2 = new br.unb.cic.ed.ArrayList[Circulo]()
+    var list3 = new br.unb.cic.ed.ArrayList[FiguraGeometrica]()
 
     list1.insert(0, Circulo(3.5))
     list1.insert(1, Retangulo(3.0, 2.0))
@@ -173,5 +175,13 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
     list1.addAll(list2)
 
     list1.size() should be (5)
+
+    list3.insert(0, Circulo(10))
+
+    list1.addAll(list3)
+
+    list1.size should be (6)
+
+//    l3 = l2 
   }
 }
