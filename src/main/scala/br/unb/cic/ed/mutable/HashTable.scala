@@ -8,10 +8,10 @@ package br.unb.cic.ed.mutable
   * @author thaleslim
   */
 
-trait HashTable[A,B] {
-  //def hashing(value: A): Option[Int]
+trait HashTable[A,B]{
+  def setHashin(hash: A => Int): Unit
   def insert(key: A, value: B): Unit
-  //def search(key: A): Option[B]
-  def remove(pos: Int): Unit
+  def search(key: A): Option[B]
+  def remove(index: A): Unit
   def size(): Int
 }

@@ -19,4 +19,11 @@ class TestHashTable extends FlatSpec with Matchers with GivenWhenThen with Befor
     hashTable.size() should be (0)
   }
 
+  it should "have size == 1 after hashTable.insert(1,\"one\")(_*2) and hashTable.search(1)(_*2) return Some(\"one\")" in {
+    hashTable.setHashin( _ * 2)
+	hashTable.insert(1,"one")
+    hashTable.size() should be (1)
+	hashTable.search(1) should be (Some("one"))
+  }
+
 }
