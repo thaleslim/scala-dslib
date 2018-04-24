@@ -17,15 +17,15 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 	
 	private def search(key: A): Option[B] = {
         if( max == 0 ) None
-		var index = default_hash(key)
-		if( index > -1 && index < max )
+		var index = default_hash(key) % max
+		if( index > -1 && index < max && elements(index) != default_value)
 			Some(elements(index))
 		else
 			None
     }
 
-	def insert (key: A, value: B): Unit = {
-		var index = default_hash(key)
+	private def insert (key: A, value: B): Unit = {
+		var index = default_hash(key) % max
 		if(index > -1 && index < max ){
 			if(elements(index) == default_value)
 				elements(index) = value
@@ -34,9 +34,18 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 		else throw br.unb.cic.ed.mutable.InvalidArgument("Out of range");
     }
 
-	def apply(newHash: A => Int): Unit = {this.setHashing(newHash)}
+	def apply(newHash: A => Int): Unit = this.setHashing(newHash)
 
-	def apply(key: A): Option[B] = {this.search(key)}
+	def apply(key: A): Option[B] = this.search(key)
+
+	def apply(pair: Tuple2[A,B]): Unit = this.insert(pair._1,pair._2)
+
+	def apply(values: Tuple2[A,B]*): Unit = {
+		if(!values.isEmpty){
+			this.apply(values.head)
+			this.apply(values.tail: _*)
+		}
+	}
 
     def remove(index: A): Unit = {
 

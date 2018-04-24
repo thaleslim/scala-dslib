@@ -11,6 +11,7 @@ package br.unb.cic.ed.mutable
 trait HashMap[A,B]{
 	def apply(newHash: A => Int): Unit
 	def apply(key: A): Option[B]
-	def insert(key: A, value: B): Unit
+  def apply(init: Tuple2[A,B]): Unit
+  def apply(values: Tuple2[A,B]*): Unit
 	def remove(index: A): Unit
 }
