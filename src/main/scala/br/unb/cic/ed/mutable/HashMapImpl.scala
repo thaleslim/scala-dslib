@@ -16,9 +16,9 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 	private def setHashing(newHash: A => Int): Unit = {default_hash = newHash}
 	
 	private def search(key: A): Option[B] = {
-        if( !max ) None // If max == 0 return None
+        if( max == 0 ) None
 		var index = default_hash(key)
-		if( index > -1 && index < max && _size < max )
+		if( index > -1 && index < max )
 			Some(elements(index))
 		else
 			None
@@ -27,10 +27,8 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 	def insert (key: A, value: B): Unit = {
 		var index = default_hash(key)
 		if(index > -1 && index < max ){
-			if(elements(index) == default_value){
+			if(elements(index) == default_value)
 				elements(index) = value
-				_size += 1
-			}
 			else throw br.unb.cic.ed.mutable.InvalidArgument("Position occupied");
 		}
 		else throw br.unb.cic.ed.mutable.InvalidArgument("Out of range");

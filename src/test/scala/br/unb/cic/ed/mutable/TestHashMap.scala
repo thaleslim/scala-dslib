@@ -5,25 +5,20 @@ import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
-class TestHashTable extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
+class TestHashMap extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
-  behavior of "A Hash Table"
+  behavior of "A Hash Map"
 
-  var hashTable: br.unb.cic.ed.mutable.HashTable[Int,String] = _ 
+  var hashMap: br.unb.cic.ed.mutable.HashMap[Int,String] = _ 
 
   before {
-    hashTable = new br.unb.cic.ed.mutable.ArrayHashTable[Int,String]()
+    hashMap = new br.unb.cic.ed.mutable.ArrayHashMap[Int,String]()
   }
 
-  it should "have size == 0 before inserting any element" in {
-    hashTable.size() should be (0)
-  }
-
-  it should "have size == 1 after hashTable.insert(1,\"one\")(_*2) and hashTable.search(1)(_*2) return Some(\"one\")" in {
-    hashTable(_*2)
-    hashTable.insert(1,"one")
-    hashTable.size() should be (1)
-    hashTable(1) should be (Some("one"))
+  it should "have hashMap(1) = Some(\"one\") if hashMap.insert(1,\"one\") has been executed before" in {
+    hashMap.insert(1,"one")
+	//hashMap(1 -> "one")
+    hashMap(1) should be (Some("one"))
   }
 
 }
