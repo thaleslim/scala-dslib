@@ -1,8 +1,8 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma especificao do tipo lista 
-  * usando a constru\c c\~{a}o trait da linguagem 
+  * Uma especifição do tipo Hash MAp
+  * usando a construção trait da linguagem 
   * Scala. 
   * 
   * @author thaleslim

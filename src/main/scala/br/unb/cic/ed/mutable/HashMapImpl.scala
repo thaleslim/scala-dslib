@@ -1,7 +1,7 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma implementacao do tipo hash table usando
+  * Uma implementação do tipo Hash Map usando
   * alocacao sequencial (um array de elementos).
   *
   * @author: thaleslim
