@@ -7,17 +7,23 @@ package br.unb.cic.ed.mutable
   * @author: thaleslim
   */
 
-class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,B]{
+case class HashMapElement[A, B](var key: A, var value: B)
 
-    private var elements = Array.ofDim[B](max)
+class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) extends HashMap[A,B]{
+
+    private var elements = Array.ofDim[HashMapElement[A,B]](max)
 	private var default_hash: A => Int = ( _.hashCode() % max )
-    private val default_value = elements(0)
+
+	private def get_position(key: A): Int = {
+		
+	}
 
 	private def insert(key: A, value: B): Unit = {
-		var index = default_hash(key)
+		var index = this.default_hash(key)
 		if(index > -1 && index < max ){
-			if(elements(index) == default_value)
-				elements(index) = value
+			if(this.elements(index) == null){
+				this.elements(index) = HashMapElement[A,B](key,value)
+			}
 			else throw br.unb.cic.ed.mutable.InvalidArgument("Position occupied");
 		}
 		else throw br.unb.cic.ed.mutable.InvalidArgument("Out of range");
@@ -25,18 +31,20 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 	
 	private def search(key: A): Option[B] = {
         if( max == 0 ) None
-		var index = default_hash(key)
-		if( index > -1 && index < max && elements(index) != default_value)
-			Some(elements(index))
-		else
-			None
+		var index = this.default_hash(key)
+		if( index > -1 && index < max && this.elements(index) != null ){
+			if( key.compareTo(this.elements(index).key) == 0 ){
+				return Some(this.elements(index).value)
+			}
+		}
+		return None
     }
 
-	def apply(newHash: A => Int): Unit = { default_hash = newHash }
+	def apply(newHash: A => Int): Unit = { this.default_hash = newHash }
 
 	def apply(key: A): Option[B] = this.search(key)
 
-	def apply(pair: Tuple2[A,B]): Unit = this.insert(pair._1,pair._2)
+	def apply(pair: Tuple2[A,B]): Unit = this.insert(pair._1, pair._2)
 
 	def apply(values: Tuple2[A,B]*): Unit = {
 		if(!values.isEmpty){
@@ -45,7 +53,10 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 		}
 	}
 
-    def remove(index: A): Unit = 
-		if(max > 0 && index > -1 && index < max)
-			elements(index) = default_value
+	def - (key: A): Unit = {
+		var index = this.default_hash(key) 
+		if(max > 0 && index > -1 && index < max && this.elements(index).key == key)
+			this.elements(index) = null
+	}
+
 }
