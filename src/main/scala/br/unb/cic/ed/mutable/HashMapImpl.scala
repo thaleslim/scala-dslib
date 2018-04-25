@@ -10,22 +10,11 @@ package br.unb.cic.ed.mutable
 class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,B]{
 
     private var elements = Array.ofDim[B](max)
-	private var default_hash: A => Int = ( _.hashCode() )
+	private var default_hash: A => Int = ( _.hashCode() % max )
     private val default_value = elements(0)
 
-	private def setHashing(newHash: A => Int): Unit = {default_hash = newHash}
-	
-	private def search(key: A): Option[B] = {
-        if( max == 0 ) None
-		var index = default_hash(key) % max
-		if( index > -1 && index < max && elements(index) != default_value)
-			Some(elements(index))
-		else
-			None
-    }
-
-	private def insert (key: A, value: B): Unit = {
-		var index = default_hash(key) % max
+	private def insert(key: A, value: B): Unit = {
+		var index = default_hash(key)
 		if(index > -1 && index < max ){
 			if(elements(index) == default_value)
 				elements(index) = value
@@ -33,8 +22,17 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 		}
 		else throw br.unb.cic.ed.mutable.InvalidArgument("Out of range");
     }
+	
+	private def search(key: A): Option[B] = {
+        if( max == 0 ) None
+		var index = default_hash(key)
+		if( index > -1 && index < max && elements(index) != default_value)
+			Some(elements(index))
+		else
+			None
+    }
 
-	def apply(newHash: A => Int): Unit = this.setHashing(newHash)
+	def apply(newHash: A => Int): Unit = { default_hash = newHash }
 
 	def apply(key: A): Option[B] = this.search(key)
 
@@ -47,7 +45,7 @@ class ArrayHashMap[A, B: Manifest](private val max: Int = 10) extends HashMap[A,
 		}
 	}
 
-    def remove(index: A): Unit = {
-
-    }
+    def remove(index: A): Unit = 
+		if(max > 0 && index > -1 && index < max)
+			elements(index) = default_value
 }
