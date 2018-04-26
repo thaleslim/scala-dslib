@@ -17,6 +17,13 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 	private var default_hash: A => Int = ( _.hashCode() % max )
 
 	private def sondagem_quadratica(start: Int): Int = {
+		/* Uses a quadratic function to generate a index and checks
+		 * if in that generated index inside the elements array has
+		 * a empty space.
+		 * @return Returns the empty space' index or, if doesn't find
+		 * any free spaces, -1 
+		 */
+
 		var index = start
 		var contador = 1
 		
@@ -27,6 +34,12 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 	}
 
 	private def sondagem_linear(start: Int): Int = {
+		/* Runs through every index of the elements, searching
+		 * for a empty space
+		 * @return Returns the empty space' index or, if doesn't find
+		 * any free spaces, -1 
+		 */
+
 		var index = start
 		var found: Boolean = false
 
@@ -47,6 +60,19 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 	}
 
 	private def get_position(key: A): Int = {
+		/* Responsible for selecting a valid position for insertion
+		 * First Step: attemps using the hash method to find the index,
+		 * if that fails in pointing to a empty space proceeds
+		 * Second Step: attemps to use the index generated in the last
+		 * step with a quadratic function, that generates some empty
+		 * gaps between the values, but if that fails as a last resort
+		 * we proceed to the last step
+		 * Third Step: Runs through the entire array searching for
+		 * a empty space
+		 * @return Returns the empty space' index or, if doesn't find
+		 * any free spaces, -1 
+		 */
+
 		var index: Int = this.default_hash(key) % max
 		
 		if( index > -1 && index < max && this.elements(index) == null )
@@ -66,6 +92,10 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 	}
 
 	private def insert(key: A, value: B): Unit = {
+		/* Responsible for inserting a new element to the structure
+		 * Throws a exception if the structure has reached it's storage limit
+		 */
+
 		var index = get_position(key)
 		if( index >= 0 )
 			this.elements(index) = HashMapElement[A,B](key,value)
@@ -73,6 +103,14 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
     }
 
 	private def locate(start: Int, key: A): Int = {
+		/* Responsible for auxiliating this.search in the process of locating the value
+		 * Usefull in cases where's a collision
+		 * @param start: Usually the result from the hashing method, it's used as the
+		 * starting position of the search process
+		 * @param key: The acess key to the value being searched
+		 * @return Returns the value' index or -1 if doesn't find the corresponding value
+		 */
+
 		var index = start
 		var found: Boolean = false
 
@@ -94,6 +132,11 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 	}
 	
 	private def search(key: A): Option[B] = {
+		/* Responsible for searching for the values based on their respective keys
+		 * Interacts with the user through the apply method
+		 * @returns None if does'nt find the corresponding value
+		 */
+
         if( max == 0 ) None
 		var index = this.default_hash(key) % max
 		if( index > -1 && index < max && this.elements(index) != null ){
@@ -134,6 +177,13 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 					this.elements(index) = null
 			}
 		}	
+	}
+
+	def - (keys: A*): Unit = {
+		if(!keys.isEmpty){
+			this.-(keys.head)
+			this.-(keys.tail: _*)
+		}
 	}
 
 }
