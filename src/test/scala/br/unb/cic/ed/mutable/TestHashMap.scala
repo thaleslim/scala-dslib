@@ -12,13 +12,13 @@ class TestHashMap extends FlatSpec with Matchers with GivenWhenThen with BeforeA
   var hashMap: br.unb.cic.ed.mutable.HashMap[String,String] = _ 
 
   before {
-    hashMap = new br.unb.cic.ed.mutable.ArrayHashMap[String,String](4)
+	hashMap = new br.unb.cic.ed.mutable.ArrayHashMap[String,String](4)
 	hashMap(_.length())
   }
 
   it should "have hashMap(\"one\") = Some(\"um\") if hashMap(\"one\" -> \"um\") has been executed before" in {
 	hashMap("one" -> "um")
-    hashMap("one")   should be (Some("um"))
+	hashMap("one")   should be (Some("um"))
   }
 
   it should "return None after calling hashMap(\"two\") na estrutura hashMap(\"one\" -> \"um\")" in {
