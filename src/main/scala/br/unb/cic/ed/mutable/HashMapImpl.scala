@@ -14,7 +14,7 @@ case class HashMapElement[A <: Comparable[A], B](var key: A, var value: B){
 class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) extends HashMap[A,B]{
 
     private var elements = Array.ofDim[HashMapElement[A,B]](max)
-	private var default_hash: A => Int = ( _.hashCode() % max )
+	private var default_hash: A => Int = ( _.hashCode() )
 
 	private def sondagem_quadratica(start: Int): Int = {
 		/* Uses a quadratic function to generate a index and checks
@@ -44,16 +44,15 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 		var found: Boolean = false
 
 		var break: Boolean = false
-		while (!break){
+		while (!break && !found){
 			index += 1
 
-			if( !(index < max) && start != 0 )
-				index = 0
-			else if( this.elements(index) == null ){
-				break = true; found = true
-			}else
+			if( !(index < this.max) && start != 0 )
+                index = 0
+            else if( this.elements(index) == null )
+				found = true
+            else if( index == start )
 				break = true
-
 		}
 		
 		if( found ) return index else return -1
@@ -74,15 +73,15 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 		 */
 
 		var index: Int = this.default_hash(key) % max
-		
+
+
 		if( index > -1 && index < max && this.elements(index) == null )
 			return index
-		
-		var position = sondagem_quadratica(index)
 
+		var position = sondagem_quadratica(index)
 		if( position > -1 )
 			return position
-		
+
 		position = sondagem_linear(index)
 
 		if( position > -1 )
@@ -115,16 +114,15 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 		var found: Boolean = false
 
 		var break: Boolean = false
-		while( !break ){
+		while( !break && !found ){
 			index += 1
 			
-			if( !(index < max) )
+			if( !(index < max) && start != 0 )
 				index = 0
 			else if( index == start )
 				break = true
-			else if( this.elements(index) != null && this.elements(index).equalTo(key) ){
-				break = true; found = true
-			}
+			else if( this.elements(index) != null && this.elements(index).equalTo(key) )
+				found = true
 
 		}
 
@@ -140,7 +138,7 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
         if( max == 0 ) None
 		var index = this.default_hash(key) % max
 		if( index > -1 && index < max && this.elements(index) != null ){
-			if( this.elements(index).equalTo(key) )
+            if( this.elements(index).equalTo(key) )
 				return Some(this.elements(index).value)
 			else{
 				index = locate(index,key)

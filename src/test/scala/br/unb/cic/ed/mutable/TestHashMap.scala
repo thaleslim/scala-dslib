@@ -1,5 +1,6 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.mutable._
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
@@ -9,11 +10,11 @@ class TestHashMap extends FlatSpec with Matchers with GivenWhenThen with BeforeA
 
   behavior of "A Hash Map"
 
-  var hashMap: br.unb.cic.ed.mutable.HashMap[String,String] = _ 
+  var hashMap: HashMap[String,String] = _ 
 
   before {
-	hashMap = new br.unb.cic.ed.mutable.ArrayHashMap[String,String](4)
-	hashMap(_.length())
+	hashMap = new ArrayHashMap[String,String](4)
+	//hashMap(_.length())
   }
 
   it should "have hashMap(\"one\") = Some(\"um\") if hashMap(\"one\" -> \"um\") has been executed before" in {
@@ -31,7 +32,7 @@ class TestHashMap extends FlatSpec with Matchers with GivenWhenThen with BeforeA
 	hashMap("three") should be (None)
   }
 
-  it should "be able to retrive every value from hashMap(\"1one\" -> \"um\", \"2two\" -> \"dois\", \"three\" -> \"três\", \"four\" -> \"quatro\")" in {
+  it should "be able to retrive every value from hashMap(\"one\" -> \"um\", \"two\" -> \"dois\", \"three\" -> \"três\", \"four\" -> \"quatro\")" in {
 	hashMap("one" -> "um", "two" -> "dois", "three" -> "três", "four" -> "quatro")
 	hashMap("one")   should be (Some("um"))
 	hashMap("two")   should be (Some("dois"))
@@ -45,7 +46,7 @@ class TestHashMap extends FlatSpec with Matchers with GivenWhenThen with BeforeA
 	hashMap("one")   should be (None)
   }
 
-  it should "throw a Exception if you try to insert more elements than informed to the class' constructor" in {
+  it should "throw a Exception if you try to insert more elements than previously informed to the class' constructor" in {
 	hashMap("one" -> "um", "two" -> "dois", "three" -> "três", "four" -> "quatro")
 	
 	hashMap("one")   should be (Some("um"))
