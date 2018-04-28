@@ -1,7 +1,5 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits.HashMap
-
 /**
   * Uma implementação do tipo Hash Map usando
   * alocacao sequencial (um array de elementos).
