@@ -1,12 +1,15 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits._
+
 /**
   * Uma implementacao do tipo lista usando
   * alocacao sequencial (um array de elementos).
   *
   * @author: rbonifacio
   */
-class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
+
+class ArrayList[T <: Comparable[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
@@ -57,6 +60,7 @@ class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
 
   def size(): Int = _size
 
+/*
   def addAll[B <: T](values: List[B]): Unit = {
     if(values.size() + _size > max) {
       throw new InvalidArgument("overflow!!!")
@@ -69,5 +73,6 @@ class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
       }
     }
   }
+*/
 
 }

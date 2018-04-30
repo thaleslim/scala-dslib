@@ -1,34 +1,11 @@
 package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.traits._
+import br.unb.cic.ed.ConcreteIterators._
 
 case class NodeList[T](val value: T, var next: NodeList[T])
 
-//TODO: Criar um metódo de lista que retorne Some(o endereço do seu nó ou a cabeça da lista) ou None
-//Solução provisória: restringi o Iterable para LinkedList e tornei publico o método nodeAtPosition
-class ListIterable[T](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
-
-    private var cursor: NodeList[T] = null
-    private var temp: NodeList[T] = cursor
-
-    def currentItem(): NodeList[T] = this.cursor
-
-    def first() = { this.cursor = list.nodeAtPosition(0) }
-
-    def previous(): Unit = { this.cursor = this.temp }
-
-    def next(): Unit = {
-        if( !this.isDone ){
-            this.temp = this.cursor
-            this.cursor = this.cursor.next
-        }
-    }
-
-    def isDone(): Boolean = if( this.cursor == null && this.temp != null ) true else false
-    
-}
-
-class LinkedList[T] extends List[T] with Aggregate[ListIterable[T]]{
+class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable[T]]{
 
   private var _size: Int = 0 
   private var head: NodeList[T] = null
@@ -68,7 +45,7 @@ class LinkedList[T] extends List[T] with Aggregate[ListIterable[T]]{
   }
 
   def insert(pos: Int, value: T){
-    if(pos >=0 && pos <= _size) {
+    if(pos >= 0 && pos <= _size) {
       if(pos == 0) {
         head = NodeList(value, head) 
       }
@@ -96,8 +73,16 @@ class LinkedList[T] extends List[T] with Aggregate[ListIterable[T]]{
     }
     _size -= 1
   }
-
+    //TODO> Implementar addAll and foreach
+/*
   def addAll[B <: T](values: List[B]) : Unit = {
     throw InvalidArgument("not implemented yet") 
   }
+
+  def foreach[U](f: T => U): LinkedList[U] = {
+    var cursor = this.createIterator
+    cursor.first
+    while( cursor.currentItem != null && !cursor.isDone ) cursor.next
+  }
+*/
 }
