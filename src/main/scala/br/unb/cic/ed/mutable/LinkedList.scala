@@ -1,23 +1,50 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits._
 
 case class NodeList[T](val value: T, var next: NodeList[T])
 
-class LinkedList[T] extends List[T] {
+//TODO: Criar um metódo de lista que retorne Some(o endereço do seu nó ou a cabeça da lista) ou None
+//Solução provisória: restringi o Iterable para LinkedList e tornei publico o método nodeAtPosition
+class ListIterable[T](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
+
+    private var cursor: NodeList[T] = null
+    private var temp: NodeList[T] = cursor
+
+    def currentItem(): NodeList[T] = this.cursor
+
+    def first() = { this.cursor = list.nodeAtPosition(0) }
+
+    def previous(): Unit = { this.cursor = this.temp }
+
+    def next(): Unit = {
+        if( !this.isDone ){
+            this.temp = this.cursor
+            this.cursor = this.cursor.next
+        }
+    }
+
+    def isDone(): Boolean = if( this.cursor == null && this.temp != null ) true else false
+    
+}
+
+class LinkedList[T] extends List[T] with Aggregate[ListIterable[T]]{
 
   private var _size: Int = 0 
   private var head: NodeList[T] = null
 
+  def createIterator(): ListIterable[T] = return new ListIterable[T](this)
+
   def size(): Int = _size
 
-  private def nodeAtPosition(pos: Int): NodeList[T] = {
+  def nodeAtPosition(pos: Int): NodeList[T] = {
     var it = head
     for(i <- 0 until pos) {
       it = it.next
     }
     return it
   }
-
+    //TODO: Padronizar função find para um tipo T <: Comparable
   def find(value: T): Option[Int] = {
     if(size == 0) { return None }
     var it = head

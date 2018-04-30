@@ -8,14 +8,14 @@ package br.unb.cic.ed.traits
   * @author thaleslim
   */
 
-trait Aggregate[NodeType]{
-    def createIterator(): Iterator[NodeType]    //Interface para inicialização de um Iterator    
+trait Aggregate[ConcreteIterator]{
+    def createIterator(): ConcreteIterator      //Interface para inicialização de um Iterator    
 /*
-	def apply(newHash: A => Int): Unit		    //Altera a função default de hash
-	def apply(key: A): Option[B]        	    //Busca por um valor no Hash Map baseado em uma chave
-	def apply(pair: Tuple2[A,B]): Unit		    //Insere um valor no Hash Map vinculando-o a uma chave, usar operador -> ou uma Tupla
-	def apply(values: Tuple2[A,B]*): Unit	    //Insere uma sequência de Tuplas no Hash Map
-	def - (key: A): Unit					    //Remove um valor do Hash Map
-	def - (keys: A*): Unit					    //Remove uma sequência de valores do Hash Map
+    def apply(newHash: A => Int): Unit		    //Altera a função default de hash
+    def apply(key: A): Option[B]        	    //Busca por um valor no Hash Map baseado em uma chave
+    def apply(pair: Tuple2[A,B]): Unit		    //Insere um valor no Hash Map vinculando-o a uma chave, usar operador -> ou uma Tupla
+    def apply(values: Tuple2[A,B]*): Unit	    //Insere uma sequência de Tuplas no Hash Map
+    def - (key: A): Unit					    //Remove um valor do Hash Map
+    def - (keys: A*): Unit					    //Remove uma sequência de valores do Hash Map
 */
 }

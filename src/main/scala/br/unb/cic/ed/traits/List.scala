@@ -1,12 +1,12 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma especifica\c c\~{a}o do tipo lista 
-  * usando a constru\c c\~{a}o trait da linguagem 
-  * Scala. 
+  * Uma especificação do tipo lista usando
+  * a construção trait da linguagem Scala. 
   * 
   * @author rbonifacio
-  */ 
+  */
+
 trait List[T] {
   def find(value: T): Option[Int]
   def elementAt(pos: Int): Option[T]
