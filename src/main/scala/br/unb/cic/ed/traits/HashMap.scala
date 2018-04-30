@@ -1,7 +1,7 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma especifição do tipo Hash MAp
+  * Uma especifição do tipo Hash Map
   * usando a construção trait da linguagem 
   * Scala. 
   * 
