@@ -27,18 +27,15 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 
   it should "have size == 3 after inserting three elements" in {
-    list.insert(0, 5)
-    list.insert(1, 6)
-    list.insert(2, 7)
-
+    list(5, 6, 7)
     list.size() should be (3)
+    list.elementAt(0) should be (Some(5))
+    list.elementAt(1) should be (Some(6))
+    list.elementAt(2) should be (Some(7))
   }
 
   it should "should keep the list of inserted values" in {
-    list.insert(0, 1)
-    list.insert(1, 2)
-    list.insert(2, 3)
-
+    list + ((0,1),(1,2),(2,3))
     list.size() should be (3)
     list.elementAt(0) should be (Some(1))
     list.elementAt(1) should be (Some(2))
