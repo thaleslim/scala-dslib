@@ -5,7 +5,7 @@ import br.unb.cic.ed.ConcreteIterators._
 
 case class NodeList[T](val value: T, var next: NodeList[T])
 
-class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable[T]]{
+class LinkedList[T <: Ordering[T]] extends List[T] with Aggregate[ListIterable[T]]{
 
   private var _size: Int = 0 
   private var head: NodeList[T] = null
@@ -13,10 +13,10 @@ class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable
   def createIterator(): ListIterable[T] = return new ListIterable[T](this)
 
   def size(): Int = _size
-
-  def nodeAtPosition(pos: Int): NodeList[T] = {
+    //TODO: Stress Test nodeAtPosition
+  def nodeAtPosition(idx: Int): NodeList[T] = {
     var it = head
-    for(i <- 0 until pos) {
+    for(index <- 0 until idx) {
       it = it.next
     }
     return it
@@ -27,7 +27,7 @@ class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable
     var it = head
     var idx = 0
     while(it != null) {
-      if(it.value == value) {
+      if( value.equals(it.value) ) {
         return Some(idx); 
       }
       it = it.next
@@ -36,21 +36,21 @@ class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable
     return None
   }
 
-  def elementAt(pos: Int): Option[T] = {
-    if(pos < 0 || pos > _size) {
+  def elementAt(idx: Int): Option[T] = {
+    if(idx < 0 || idx > _size) {
       return None
     }
-    val node = nodeAtPosition(pos)
+    val node = nodeAtPosition(idx)
     return Some(node.value)
   }
 
-  def insert(pos: Int, value: T){
-    if(pos >= 0 && pos <= _size) {
-      if(pos == 0) {
+  def insert(idx: Int, value: T){
+    if(idx >= 0 && idx <= _size) {
+      if(idx == 0) {
         head = NodeList(value, head) 
       }
       else {
-        val node = nodeAtPosition(pos-1)
+        val node = nodeAtPosition(idx-1)
         node.next = NodeList(value, node.next)
       }
       _size += 1
@@ -60,25 +60,26 @@ class LinkedList[T <: Comparable[T]] extends List[T] with Aggregate[ListIterable
     }
   }
 
-  def remove(pos: Int): Unit = {
-    if(pos < 0 || pos >= size) {
+  def remove(idx: Int): Unit = {
+    if(idx < 0 || idx >= size) {
       throw br.unb.cic.ed.mutable.InvalidArgument()
     }
-    if(pos == 0) {
+    if(idx == 0) {
       head = head.next
     }
     else {
-      val node = nodeAtPosition(pos-1)
+      val node = nodeAtPosition(idx-1)
       node.next = node.next.next
     }
     _size -= 1
   }
-    //TODO> Implementar addAll and foreach
-/*
-  def addAll[B <: T](values: List[B]) : Unit = {
+
+    //TODO: Implementar addAll and foreach
+  def addAll(values: List[T]) : Unit = {
     throw InvalidArgument("not implemented yet") 
   }
 
+/*
   def foreach[U](f: T => U): LinkedList[U] = {
     var cursor = this.createIterator
     cursor.first

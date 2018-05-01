@@ -10,10 +10,10 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
 
   behavior of "A Stack"
 
-  var stack : br.unb.cic.ed.mutable.Stack[Integer] = _
+  var stack : br.unb.cic.ed.mutable.Stack[Int] = _
 
   before {
-    stack = new br.unb.cic.ed.mutable.StackImpl[Integer](new ArrayList[Integer]())
+    stack = new br.unb.cic.ed.mutable.StackImpl[Int](new ArrayList[Int]())
   }
 
   it should "have size == 0 before stacking any element" in {

@@ -9,47 +9,47 @@ import br.unb.cic.ed.traits._
   * @author: rbonifacio
   */
 
-class ArrayList[T <: Comparable[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
+class ArrayList[T <: Ordering[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
 
-  def insert(pos: Int, value: T): Unit = {
-    if(pos >= 0 && pos <= _size && pos < max) {
-      if(pos == _size) {
-        elements(pos) = value
+  def insert(idx: Int, value: T): Unit = {
+    if(idx >= 0 && idx <= _size && idx < max) {
+      if(idx == _size) {
+        elements(idx) = value
       }
       else {
-        for(index <- (_size-1) to pos by -1){
+        for(index <- (_size-1) to idx by -1){
           elements(index + 1) = elements(index)
         }
-        elements(pos) = value
+        elements(idx) = value
       }
       _size += 1
     }
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
-  def elementAt(pos: Int): Option[T] = {
-    if(pos >= 0 && pos < _size) {
-      return Some(elements(pos))
+  def elementAt(idx: Int): Option[T] = {
+    if(idx >= 0 && idx < _size) {
+      return Some(elements(idx))
     }
     return None
   }
 
   def find(value: T): Option[Int] = {
     for(idx <- 0 until _size) {
-      if(value == elements(idx)) {
+      if( value.equals(elements(idx)) ) {
         return Some(idx)
       }
     }
     return None
   }
 
-  def remove(pos: Int): Unit = {
-    if(pos >= 0 && pos < _size) {
-      if(pos != _size-1){
-        for(index <- pos until (_size-1)){
+  def remove(idx: Int): Unit = {
+    if(idx >= 0 && idx < _size) {
+      if(idx != _size-1){
+        for(index <- idx until (_size-1)){
           elements(index) = elements(index+1)
         }
       }
@@ -60,8 +60,7 @@ class ArrayList[T <: Comparable[T]: Manifest](private val max: Int = 10) extends
 
   def size(): Int = _size
 
-/*
-  def addAll[B <: T](values: List[B]): Unit = {
+  def addAll(values: List[T]): Unit = {
     if(values.size() + _size > max) {
       throw new InvalidArgument("overflow!!!")
     }
@@ -73,6 +72,5 @@ class ArrayList[T <: Comparable[T]: Manifest](private val max: Int = 10) extends
       }
     }
   }
-*/
 
 }
