@@ -9,10 +9,10 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
 
   behavior of "A List"
 
-  var list: br.unb.cic.ed.mutable.List[Double] = _ 
+  var list: br.unb.cic.ed.mutable.List[Integer] = _ 
 
   before {
-    list = new br.unb.cic.ed.mutable.LinkedList[Double]()
+    list = new br.unb.cic.ed.mutable.ArrayList[Integer]()
   }
 
   it should "have size == 0 before inserting any element" in {
@@ -124,8 +124,8 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 /*
   it should "lead to a list [3,4,5,6,7,8] when we call [3, 4, 5].addAll([6, 7, 8])" in {
-    val list1 = new br.unb.cic.ed.mutable.ArrayList[Int](6)
-    val list2 = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    val list1 = new br.unb.cic.ed.mutable.ArrayList[Integer](6)
+    val list2 = new br.unb.cic.ed.mutable.ArrayList[Integer]()
 
     list1.insert(0, 3)
     list1.insert(1, 4)

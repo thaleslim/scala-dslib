@@ -13,7 +13,7 @@ trait List[T <: Comparable[T]] {
     def insert(pos: Int, value: T) : Unit
     def remove(pos: Int) : Unit
     def size() : Int
-//    def addAll[B <: T](values: List[B]): Unit // TODO: Fix This
+//    def addAll[T :> B ](values: List[B]): Unit // TODO: Fix This
 /*
     def + [B <: T](values: List[B])
     def + (pair: Tuple2[Int,T])
