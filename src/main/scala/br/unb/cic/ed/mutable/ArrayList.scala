@@ -30,6 +30,18 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
+  def remove(pos: Int): Unit = {
+    if(pos >= 0 && pos < _size) {
+      if(pos != _size-1){
+        for(index <- pos until (_size-1)){
+          elements(index) = elements(index+1)
+        }
+      }
+      _size -= 1
+    }
+    else throw InvalidArgument("the first argument must be between 0 and size")
+  }
+
   def elementAt(idx: Int): Option[T] = {
     if(idx >= 0 && idx < _size) {
       return Some(elements(idx))
@@ -46,21 +58,9 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     return None
   }
 
-  def remove(idx: Int): Unit = {
-    if(idx >= 0 && idx < _size) {
-      if(idx != _size-1){
-        for(index <- idx until (_size-1)){
-          elements(index) = elements(index+1)
-        }
-      }
-      _size -= 1
-    }
-    else throw InvalidArgument("the first argument must be between 0 and size")
-  }
-
   def size(): Int = _size
 
-  def addAll(values: List[T]): Unit = {
+  def addAll[B<:T](values: List[B]): Unit = {
     if(values.size() + _size > max) {
       throw new InvalidArgument("overflow!!!")
     }
