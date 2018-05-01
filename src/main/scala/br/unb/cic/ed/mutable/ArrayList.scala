@@ -9,7 +9,7 @@ import br.unb.cic.ed.traits._
   * @author: rbonifacio
   */
 
-class ArrayList[T <: Ordering[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
@@ -39,7 +39,7 @@ class ArrayList[T <: Ordering[T]: Manifest](private val max: Int = 10) extends L
 
   def find(value: T): Option[Int] = {
     for(idx <- 0 until _size) {
-      if( value.equals(elements(idx)) ) {
+      if( value.compareTo(elements(idx)) == 0 ) {
         return Some(idx)
       }
     }

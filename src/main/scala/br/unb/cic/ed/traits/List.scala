@@ -7,7 +7,7 @@ package br.unb.cic.ed.mutable
   * @author rbonifacio / thaleslim
   */
 
-trait List[T <: Ordering[T]] {
+trait List[T] {
     def find(value: T): Option[Int]
     def elementAt(idx: Int): Option[T]
     def insert(idx: Int, value: T) : Unit

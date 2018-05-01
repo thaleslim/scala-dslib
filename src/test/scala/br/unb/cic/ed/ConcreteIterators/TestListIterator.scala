@@ -12,11 +12,10 @@ class TestListIterator extends FlatSpec with Matchers with GivenWhenThen with Be
 
   behavior of "A List's Iterator"
 
-  //var list: br.unb.cic.ed.mutable.List[Int] = _ 
-  var list: br.unb.cic.ed.mutable.LinkedList[String] = _
+  var list: br.unb.cic.ed.mutable.LinkedList[Int] = _ 
 
   before {
-    list = new br.unb.cic.ed.mutable.LinkedList[String]()
+    list = new br.unb.cic.ed.mutable.LinkedList[Int]()
   }
 
   it should "have currentItem == null after initializing the iterator" in {
@@ -36,12 +35,12 @@ class TestListIterator extends FlatSpec with Matchers with GivenWhenThen with Be
   }
 
   it should "have currentItem != null after manipulating the iterator with a non-empty List" in {
-    list.insert(0,"1")
+    list.insert(0,1)
     var cursor = list.createIterator()
     cursor.currentItem should be (null)
     cursor.first
     cursor.currentItem should not be (null)
-    cursor.currentItem.value should be ("1")
+    cursor.currentItem.value should be (1)
   }
   
 }

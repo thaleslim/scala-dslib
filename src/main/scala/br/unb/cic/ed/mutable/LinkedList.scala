@@ -5,7 +5,7 @@ import br.unb.cic.ed.ConcreteIterators._
 
 case class NodeList[T](val value: T, var next: NodeList[T])
 
-class LinkedList[T <: Ordering[T]] extends List[T] with Aggregate[ListIterable[T]]{
+class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[ListIterable[T]]{
 
   private var _size: Int = 0 
   private var head: NodeList[T] = null
@@ -27,7 +27,7 @@ class LinkedList[T <: Ordering[T]] extends List[T] with Aggregate[ListIterable[T
     var it = head
     var idx = 0
     while(it != null) {
-      if( value.equals(it.value) ) {
+      if( value.compareTo(it.value) == 0 ) {
         return Some(idx); 
       }
       it = it.next

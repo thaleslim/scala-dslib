@@ -4,7 +4,7 @@ import br.unb.cic.ed.traits._
 import br.unb.cic.ed.mutable.NodeList
 import br.unb.cic.ed.mutable.LinkedList
 
-class ListIterable[T <: Ordering[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
+class ListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
 
     private var cursor: NodeList[T] = null
     private var temp: NodeList[T] = cursor
