@@ -1,4 +1,4 @@
-package br.unb.cic.ed.mutable
+package br.unb.cic.ed.traits
 
 /**
   * Uma especificação do tipo lista usando

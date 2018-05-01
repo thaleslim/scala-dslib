@@ -1,11 +1,19 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits._
-import br.unb.cic.ed.ConcreteIterators._
+import br.unb.cic.ed.traits.List
+import br.unb.cic.ed.traits.Aggregate
+import br.unb.cic.ed.ConcreteIterators.LinkedListIterable
+
+/**
+  * Uma implementação do tipo lista usando
+  * encadeamento.
+  * 
+  * @author rbonifacio / thaleslim
+  */
 
 case class NodeList[T](val value: T, var next: NodeList[T])
 
-class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[ListIterable[T]]{
+class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIterable[T]]{
 
   private var _size: Int = 0 
   private var head: NodeList[T] = null
@@ -85,7 +93,7 @@ class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[ListIterable
     return it
   }
   
-  def createIterator(): ListIterable[T] = return new ListIterable[T](this)
+  def createIterator(): LinkedListIterable[T] = return new LinkedListIterable[T](this)
 
 /* TODO: Implementar foreach
   def foreach[U](f: T => U): LinkedList[U] = {

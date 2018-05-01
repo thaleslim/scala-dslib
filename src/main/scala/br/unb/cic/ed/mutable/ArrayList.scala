@@ -1,15 +1,17 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits._
+import br.unb.cic.ed.traits.List
+import br.unb.cic.ed.traits.Aggregate
+import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
 
 /**
-  * Uma implementacao do tipo lista usando
-  * alocacao sequencial (um array de elementos).
+  * Uma implementação do tipo lista usando
+  * alocação sequencial (um array de elementos).
   *
   * @author: rbonifacio
   */
 
-class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T]/* with Aggregate[T]*/{
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
@@ -72,5 +74,6 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
       }
     }
   }
-
+  
+  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 }

@@ -1,10 +1,17 @@
 package br.unb.cic.ed.ConcreteIterators
 
-import br.unb.cic.ed.traits._
+import br.unb.cic.ed.traits.Iterator
 import br.unb.cic.ed.mutable.NodeList
 import br.unb.cic.ed.mutable.LinkedList
 
-class ListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
+/**
+  * Uma implementação do tipo iterator baseado
+  * em uma Lista encadeada e NodeList.
+  * 
+  * @author thaleslim
+  */
+
+class LinkedListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
 
     private var cursor: NodeList[T] = null
     private var temp: NodeList[T] = cursor
@@ -13,6 +20,8 @@ class ListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends 
     def currentItem(): NodeList[T] = this.cursor
 
     def first() = { this.cursor = list.nodeAtPosition(0) }
+
+    def currentValue() = this.cursor.value
 
     def previous(): Unit = {
         if( this.temp != null ) 
