@@ -29,8 +29,11 @@ trait List[T] {
     def elementAt     (idx: Int)           : Option[T]
     def find          (value: T)           : Option[Int]
     def addAll[B <: T](values: List[B])    : Unit
+    def clear(): Unit
     def size() : Int
 
+    //Substitue a lista atual por uma nova
+    def subst (newlist: List[T]) : Unit = { this.clear; this.addAll(newlist) }
     //Insere o valor tuple._2 na posição tuple._1, usar operador -> ou uma Tupla
     def apply (tuple: Tuple2[Int,T]) = this.insert(tuple._1,tuple._2)
     def +     (tuple: Tuple2[Int,T]) = this(tuple)

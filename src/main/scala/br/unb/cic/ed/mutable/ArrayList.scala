@@ -62,8 +62,6 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     return None
   }
 
-  def size(): Int = _size
-
   def addAll[B<:T](values: List[B]): Unit = {
     if(values.size() + _size > max) {
       throw new InvalidArgument("overflow!!!")
@@ -76,8 +74,6 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
       }
     }
   }
-  
-  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 
   def clear(): Unit = {
     var cursor = this.createIterator
@@ -90,7 +86,9 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     }
   }
 
-  def subst(newlist: ArrayList[T]): Unit = { this.clear; this.addAll(newlist) }
+  def size(): Int = _size
+
+  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 
   def foreach[U](fun: T => U): Unit = {
     var cursor = this.createIterator

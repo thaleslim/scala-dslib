@@ -82,6 +82,17 @@ class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIt
     }
   }
 
+  def clear(): Unit = {
+    var cursor = this.createIterator
+    
+    cursor.first
+
+    while( !cursor ){
+        this.remove(cursor.currentIndex)
+        cursor.first
+    }
+  }
+
   def size(): Int = _size
     //TODO: Stress Test nodeAtPosition
   def nodeAtPosition(idx: Int): NodeList[T] = {
