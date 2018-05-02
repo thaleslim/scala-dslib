@@ -12,32 +12,45 @@ class TestListIterator extends FlatSpec with Matchers with GivenWhenThen with Be
 
   behavior of "A List's Iterator"
 
-  var list: br.unb.cic.ed.mutable.ArrayList[Int] = _ 
+  var list: br.unb.cic.ed.mutable.LinkedList[Int] = _ 
 
   before {
-    list = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    list = new br.unb.cic.ed.mutable.LinkedList[Int]()
   }
 
   it should "have currentItem == null after initializing the iterator" in {
     var cursor = list.createIterator()
-    //cursor.currentItem should be (null)
+    cursor.currentIndex should be (-1)
   }
 
   it should "have currentItem == null after trying to manipulate the iterator with a empty List" in {
     var cursor = list.createIterator()
-    //cursor.currentItem should be (null)
+
+    cursor.currentIndex should be (-1)
+
     cursor.first
-    //cursor.currentItem should be (null)
-    cursor.next
-    //cursor.currentItem should be (null)
-    cursor.previous
-    //cursor.currentItem should be (null)
+
+    cursor.currentIndex should be (-1)
+
+    cursor++
+
+    cursor.currentIndex should be (-1)
+
+    cursor--
+
+    cursor.currentIndex should be (-1)
   }
 
   it should "have currentItem != null after manipulating the iterator with a non-empty List" in {
     list(1)
     var cursor = list.createIterator()
+
+    cursor.currentIndex should be (-1)
+
     cursor.first
+
+    cursor.currentIndex should not be (-1)
+
     cursor.currentValue should be (1)
   }
   

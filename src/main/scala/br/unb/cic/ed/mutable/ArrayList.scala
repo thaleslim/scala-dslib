@@ -2,6 +2,7 @@ package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.traits.List
 import br.unb.cic.ed.traits.Aggregate
+import br.unb.cic.ed.traits.Traversable
 import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
 
 /**
@@ -11,7 +12,8 @@ import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
   * @author: rbonifacio
   */
 
-class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T]
+    with Aggregate[ArrayListIterable[T]] with Traversable[T,ArrayListIterable[T]]{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
@@ -76,4 +78,77 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
   }
   
   def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
+
+  def clear(): Unit = {
+    var cursor = this.createIterator
+    
+    cursor.first
+
+    while( !cursor ){
+        this.remove(cursor.currentIndex)
+        cursor.first
+    }
+  }
+
+  def subst(newlist: ArrayList[T]): Unit = { this.clear; this.addAll(newlist) }
+
+  def foreach[U](fun: T => U): Unit = {
+    var cursor = this.createIterator
+
+    cursor.first
+    
+    while( !cursor )
+        cursor.next
+
+  }
+
+  def map(fun: T => T): ArrayList[T] = {
+    var cursor = this.createIterator
+    var newlist = new ArrayList[T](this.max)
+
+    cursor.first
+    
+    while( !cursor ){
+        newlist.insert( newlist.size, fun(cursor.currentValue) )
+        cursor.next
+    }
+
+    this.subst(newlist)
+
+    return newlist
+
+  }
+
+  def reduce[A](fun: (A,T) => A)(start: A): A = {
+    var cursor  = this.createIterator
+    var result: A = start
+
+    cursor.first
+    
+    while( !cursor ){
+        result = fun( result, cursor.currentValue )
+        cursor.next
+    }
+
+    return result
+  }
+
+
+  def filter(fun: T => Boolean): ArrayList[T] = {
+    var cursor = this.createIterator
+    var newlist = new ArrayList[T](this.max)
+
+    cursor.first
+    
+    while( !cursor ){
+        if( fun(cursor.currentValue) )
+            newlist.insert(newlist.size,cursor.currentValue)
+        cursor.next
+    }
+
+    this.subst(newlist)
+
+    return newlist
+  }
+
 }

@@ -19,14 +19,15 @@ class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) exte
 
     def currentItem(): T = this.cursor
 
+    def currentIndex(): Int = index
+
     def currentValue() = this.currentItem
 
     def first() = {
         list.elementAt(0) match {
-            case Some(value) => this.cursor = value
-            case None => {}
+            case Some(value) => { this.cursor = value; this.index = 0 }
+            case None => finished = true
         }
-        this.index = 0
     }
 
     def previous(): Unit = {
