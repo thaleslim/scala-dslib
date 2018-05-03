@@ -35,7 +35,7 @@ class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIt
   }
 
   def remove(pos: Int): Unit = {
-    if(pos < 0 || pos >= size) {
+    if(pos < 0 || pos >= _size) {
       throw br.unb.cic.ed.mutable.InvalidArgument()
     }
     if(pos == 0) {
@@ -73,9 +73,9 @@ class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIt
     return None
   }
 
-  def addAll[B<:T](values: List[B]) : Unit = {
-    for(index <- 0 until values.size){
-        values.elementAt(index) match{
+  def addAll[B<:T](that: List[B]) : Unit = {
+    for(index <- 0 until that.size){
+        that.elementAt(index) match{
             case Some(value) => this.insert(this.size,value)
             case _ => throw new InvalidArgument("ooops..... unexpected")
         }

@@ -28,19 +28,21 @@ trait List[T] {
     def remove        (pos: Int)           : Unit
     def elementAt     (idx: Int)           : Option[T]
     def find          (value: T)           : Option[Int]
-    def addAll[B <: T](values: List[B])    : Unit
+    def addAll[B <: T](that: List[B])      : Unit
     def clear(): Unit
     def size() : Int
 
     //Substitue a lista atual por uma nova
-    def subst (newlist: List[T]) : Unit = { this.clear; this.addAll(newlist) }
+    def subst (that: List[T]) : Unit = { this.clear; this.addAll(that) }
     //Insere o valor tuple._2 na posição tuple._1, usar operador -> ou uma Tupla
     def apply (tuple: Tuple2[Int,T]) = this.insert(tuple._1,tuple._2)
     def +     (tuple: Tuple2[Int,T]) = this(tuple)
     //Insere a sequência de tuplas na lista de acordo com ._1 de cada elemento
-    def +     (tuples: Tuple2[Int,T]*): Unit = {
-        if( !tuples.isEmpty ) { this(tuples.head); this + (tuples.tail: _*) }
-    }
+    def +     (that: Tuple2[Int,T]*): Unit =
+        if( !that.isEmpty ) {
+            this(that.head)
+            this + (that.tail: _*)
+        }
     //Insere um valor no final da lista
     def +    (value: T) = this((this.size,value))
     //Insere uma sequência de valores na Lista, argumentos na forma de value:T
@@ -49,8 +51,8 @@ trait List[T] {
         if( !tuples.isEmpty ) { this(tuples.head); this(tuples.tail: _*) }
     }
 */
-    def apply(values: T*): Unit = {
-        if( !values.isEmpty ) { this + (values.head); this(values.tail: _*) }
+    def apply(that: T*): Unit = {
+        if( !that.isEmpty ) { this + (that.head); this(that.tail: _*) }
     }
 
     //Busca e remove um valor da Lista, argumentos na forma de target:T
@@ -62,7 +64,7 @@ trait List[T] {
     def - (index: Int): Unit = this.remove(index)
 */
     //Busca e remove uma sequência de valores da Lista
-    def - (targets: T*): Unit = {
-        if( !targets.isEmpty ){ this - (targets.head); this - (targets.tail: _*) }
+    def - (that: T*): Unit = {
+        if( !that.isEmpty ){ this - (that.head); this - (that.tail: _*) }
     }
 }

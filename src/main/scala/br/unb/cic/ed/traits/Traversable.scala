@@ -6,8 +6,8 @@ package br.unb.cic.ed.traits
   * 
   * @author thaleslim
   */
-//TODO: comentar
-trait Traversable[NodeType, IterableType] extends List[NodeType] with Aggregate[IterableType]{
+//TODO: comentar && rever herança de Traversable <-> List
+trait Traversable[NodeType, IterableType]/* extends List[NodeType] with Aggregate[IterableType]*/{
     def foreach[U](fun: NodeType => U): Unit
     
     def size(): Int = {
@@ -19,7 +19,7 @@ trait Traversable[NodeType, IterableType] extends List[NodeType] with Aggregate[
         return size
     }
 
-    def map(fun: NodeType => NodeType): Any   
-    def reduce[A](fun: (A,NodeType) => A)(start: A): Any
-    def filter(fun: NodeType => Boolean): Any
+    def map(fun: NodeType => NodeType): List[NodeType]
+    def reduce[A](fun: (A,NodeType) => A)(start: A): A
+    def filter(fun: NodeType => Boolean): List[NodeType]
 }

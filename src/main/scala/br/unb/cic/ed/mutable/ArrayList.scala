@@ -18,12 +18,13 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
   private var elements = Array.ofDim[T](max)
 
   def insert(idx: Int, value: T): Unit = {
-    if(idx >= 0 && idx <= this.size && idx < max) {
-      if(idx == this.size) {
+    var size = this.size
+    if(idx >= 0 && idx <= size && idx < max) {
+      if(idx == size) {
         elements(idx) = value
       }
       else {
-        for(index <- (this.size-1) to idx by -1){
+        for(index <- (size-1) to idx by -1){
           elements(index + 1) = elements(index)
         }
         elements(idx) = value
@@ -34,9 +35,10 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
   }
 
   def remove(pos: Int): Unit = {
-    if(pos >= 0 && pos < _size) {
-      if(pos != _size-1){
-        for(index <- pos until (_size-1)){
+    var size = this.size 
+    if(pos >= 0 && pos < size) {
+      if(pos != size-1){
+        for(index <- pos until (size-1)){
           elements(index) = elements(index+1)
         }
       }
@@ -45,30 +47,28 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
-  def elementAt(idx: Int): Option[T] = {
-    if(idx >= 0 && idx < _size) {
-      return Some(elements(idx))
-    }
-    return None
-  }
+  def elementAt(idx: Int): Option[T] = 
+    if(idx >= 0 && idx < _size) //Usar o this.size aqui dá erro
+        return Some(elements(idx))
+    else
+        return None
 
   def find(value: T): Option[Int] = {
-    for(idx <- 0 until _size) {
-      if( value.compareTo(elements(idx)) == 0 ) {
-        return Some(idx)
-      }
+    for(idx <- 0 until this.size) {
+        if( value.compareTo(elements(idx)) == 0 )
+            return Some(idx)
     }
     return None
   }
 
-  def addAll[B<:T](values: List[B]): Unit = {
-    if(values.size() + _size > max) {
+  def addAll[B<:T](that: List[B]): Unit = {
+    if(that.size + this.size > max) {
       throw new InvalidArgument("overflow!!!")
     }
 
-    for(i <- 0 until values.size()) {
-      values.elementAt(i) match {
-        case Some(v) => insert(_size, v)
+    for(i <- 0 until that.size) {
+      that.elementAt(i) match {
+        case Some(v) => this.insert(this.size, v)
         case _       => throw new InvalidArgument("ooops..... unexpected")
       }
     }
