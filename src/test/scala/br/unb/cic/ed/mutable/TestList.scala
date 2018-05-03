@@ -1,20 +1,27 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits.List
+import br.unb.cic.ed.traits.Traversable
+import br.unb.cic.ed.ConcreteIterator._
+
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
+
+/*TODO: expandir testes para novas funcionalidades implementadas: clear,
+        subst*/
 class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
   behavior of "A List"
 
-  var list:  br.unb.cic.ed.traits.List[Int] = _
-  var listAux: br.unb.cic.ed.traits.List[Int] = _
+  var list: Traversable[Int, ArrayListIterable[Int]] = _
+  var listAux: Traversable[Int, ArrayListIterable[Int]] = _
 
   before {
-    list = new br.unb.cic.ed.mutable.LinkedList[Int]()
-    listAux = new br.unb.cic.ed.mutable.LinkedList[Int]()
+    list = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    listAux = new br.unb.cic.ed.mutable.ArrayList[Int]()
   }
 
   it should "have size == 0 before inserting any element" in {
@@ -150,6 +157,30 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
     listAux.size should be (3)
 
     list.elementAt(5) should be (Some(8)) 
+  }
+
+  it should "lead to list [2,4,6] when we call [1,2,3].map(_*2)" in {
+    list( 1, 2, 3 )
+    list.map(_*2)
+
+    list.elementAt(0) should be (Some(2))
+    list.elementAt(1) should be (Some(4))
+    list.elementAt(2) should be (Some(6))
+  }
+
+  it should "return the string \"1 -> 2 -> 3 -> \" from [1,2,3].reduce[String]{ _ + _ + \" -> \"}(\"\")" in {
+    list( 1, 2, 3 )
+
+    list.reduce[String]{ _ + _ + " -> " }("") should be ("1 -> 2 -> 3 -> ")
+  }
+
+  it should "return remove all values greater than 2 after the list.filter{if(_ < 3) true else false}" in {
+    list( 88, 10, 20, 77, 1, 2, 3 )
+    list.filter{x: Int => if( x < 3) true else false }
+
+    list.size should be (2)
+    list.elementAt(0) should be (Some(1))
+    list.elementAt(1) should be (Some(2))
   }
 
 }

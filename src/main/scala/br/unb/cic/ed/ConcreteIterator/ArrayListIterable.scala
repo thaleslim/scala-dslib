@@ -1,4 +1,4 @@
-package br.unb.cic.ed.ConcreteIterators
+package br.unb.cic.ed.ConcreteIterator
 
 import br.unb.cic.ed.traits.Iterator
 import br.unb.cic.ed.mutable.ArrayList
@@ -9,7 +9,7 @@ import br.unb.cic.ed.mutable.ArrayList
   * 
   * @author thaleslim
   */
-
+//TODO: comentar
 class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) extends Iterator[T]{
 
     private var cursor: T = _
@@ -23,12 +23,10 @@ class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) exte
 
     def currentValue() = this.currentItem
 
-    def first() = {
-        list.elementAt(0) match {
+    def first() = list.elementAt(0) match {
             case Some(value) => { this.cursor = value; this.index = 0 }
             case None => finished = true
         }
-    }
 
     def previous(): Unit = {
         if( this.temp > 0 ) 
@@ -41,15 +39,16 @@ class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) exte
     }
 
     def next(): Unit = {
-        if( this.index + 1 < list.size && !this.isDone ){
-            this.temp = this.index
-            this.index += 1
-            list.elementAt(this.index) match {
-                case Some(value) => this.cursor = value
-                case None => {}
+        if( !this.isDone ){
+            list.elementAt( this.index + 1 ) match {
+                case Some(value) => {
+                    this.temp = this.index
+                    this.index += 1
+                    this.cursor = value
+                }
+                case None => finished = true
             }
-        }else
-            finished = true
+        }
     }
 
     def isDone(): Boolean = this.finished

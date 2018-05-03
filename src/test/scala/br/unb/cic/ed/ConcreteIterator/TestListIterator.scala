@@ -1,4 +1,4 @@
-package br.unb.cic.ed.ConcreteIterators
+package br.unb.cic.ed.ConcreteIterator
 
 import br.unb.cic.ed.mutable._
 

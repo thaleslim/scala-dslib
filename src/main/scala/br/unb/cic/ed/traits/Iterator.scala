@@ -14,7 +14,6 @@ trait Iterator[NodeType]{
     def first(): Unit             //Move o cursor para o início do Transversable
     def previous(): Unit          //Move o cursor para o elemento anterior
     def next(): Unit              //Move o cursor para o elemento seguinte
-    //TODO: ampliar comportamento de this.isDone()
     def isDone(): Boolean         //Verifica se chegou ao final do Transversable ou se está vazia
 
     def apply(): Boolean = this.isDone()

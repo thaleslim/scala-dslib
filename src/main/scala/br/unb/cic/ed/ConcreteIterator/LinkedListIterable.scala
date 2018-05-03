@@ -1,4 +1,4 @@
-package br.unb.cic.ed.ConcreteIterators
+package br.unb.cic.ed.ConcreteIterator
 
 import br.unb.cic.ed.traits.Iterator
 import br.unb.cic.ed.mutable.NodeList
@@ -10,7 +10,7 @@ import br.unb.cic.ed.mutable.LinkedList
   * 
   * @author thaleslim
   */
-
+//TODO: comentar
 class LinkedListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
 
     private var cursor: NodeList[T] = null
@@ -24,10 +24,12 @@ class LinkedListIterable[T <% Comparable[T]](private val list: LinkedList[T]) ex
 
     def currentValue() = this.cursor.value
 
-    def first() = { 
+    def first() = {
         this.cursor = list.nodeAtPosition(0);
         if( this.cursor != null )
             index = 0
+        else
+            finished = true
     }
 
     def previous(): Unit = {

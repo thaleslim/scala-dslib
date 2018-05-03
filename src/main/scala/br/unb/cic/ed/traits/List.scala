@@ -22,7 +22,7 @@ package br.unb.cic.ed.traits
     list - (5)
         ou uma sequência list - (5,6,7)
 */
-
+//TODO: comentar
 trait List[T] {
     def insert        (idx: Int, value: T) : Unit
     def remove        (pos: Int)           : Unit

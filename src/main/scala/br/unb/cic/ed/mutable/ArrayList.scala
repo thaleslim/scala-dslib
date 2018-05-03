@@ -3,7 +3,7 @@ package br.unb.cic.ed.mutable
 import br.unb.cic.ed.traits.List
 import br.unb.cic.ed.traits.Aggregate
 import br.unb.cic.ed.traits.Traversable
-import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
+import br.unb.cic.ed.ConcreteIterator.ArrayListIterable
 
 /**
   * Uma implementação do tipo lista usando
@@ -11,20 +11,19 @@ import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
   *
   * @author: rbonifacio
   */
-
-class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T]
-    with Aggregate[ArrayListIterable[T]] with Traversable[T,ArrayListIterable[T]]{
+//TODO: comentar
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends Traversable[T, ArrayListIterable[T]]{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
 
   def insert(idx: Int, value: T): Unit = {
-    if(idx >= 0 && idx <= _size && idx < max) {
-      if(idx == _size) {
+    if(idx >= 0 && idx <= this.size && idx < max) {
+      if(idx == this.size) {
         elements(idx) = value
       }
       else {
-        for(index <- (_size-1) to idx by -1){
+        for(index <- (this.size-1) to idx by -1){
           elements(index + 1) = elements(index)
         }
         elements(idx) = value
@@ -86,7 +85,7 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     }
   }
 
-  def size(): Int = _size
+  //def size(): Int = _size
 
   def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 
@@ -94,9 +93,11 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     var cursor = this.createIterator
 
     cursor.first
-    
-    while( !cursor )
+
+    while( !cursor ){
+        fun(cursor.currentValue)
         cursor.next
+    }
 
   }
 
@@ -130,7 +131,6 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
 
     return result
   }
-
 
   def filter(fun: T => Boolean): ArrayList[T] = {
     var cursor = this.createIterator

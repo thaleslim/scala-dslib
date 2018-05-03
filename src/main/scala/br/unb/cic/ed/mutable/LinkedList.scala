@@ -2,7 +2,7 @@ package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.traits.List
 import br.unb.cic.ed.traits.Aggregate
-import br.unb.cic.ed.ConcreteIterators.LinkedListIterable
+import br.unb.cic.ed.ConcreteIterator.LinkedListIterable
 
 /**
   * Uma implementação do tipo lista usando
@@ -10,7 +10,7 @@ import br.unb.cic.ed.ConcreteIterators.LinkedListIterable
   * 
   * @author rbonifacio / thaleslim
   */
-
+//TODO: aplicar suporte a Traversable e comentar
 case class NodeList[T](val value: T, var next: NodeList[T])
 
 class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIterable[T]]{
