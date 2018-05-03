@@ -10,7 +10,7 @@ import br.unb.cic.ed.mutable.ArrayList
   * @author thaleslim
   */
 //TODO: comentar
-class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) extends Iterator[T]{
+class ArrayListIterable[T <% Comparable[T]](private val elements: Array[T]) extends Iterator[T]{
 
     private var cursor: T = _
     private var index: Int = -1
@@ -19,38 +19,33 @@ class ArrayListIterable[T <% Comparable[T]](private val list: ArrayList[T]) exte
 
     def currentItem(): T = this.cursor
 
-    def currentIndex(): Int = index
+    def currentIndex(): Int = this.index
 
-    def currentValue() = this.currentItem
-
-    def first() = list.elementAt(0) match {
-            case Some(value) => { this.cursor = value; this.index = 0 }
-            case None => finished = true
-        }
+    def first() = { 
+        if( this.elements.length > 0){
+            this.cursor = this.elements(0)
+            this.index = 0
+        }else 
+            this.finished = true
+    }
 
     def previous(): Unit = {
-        if( this.temp > 0 ) 
-            list.elementAt(this.temp) match {
-                case Some(value) => this.cursor = value
-                case None => {}
-            }
-        else
-            finished = true
+        if( this.temp > 0 ) {
+            this.cursor = elements(this.temp); this.index = this.temp; this.temp -= 1
+        }else
+            this.finished = true
     }
 
     def next(): Unit = {
-        if( !this.isDone ){
-            list.elementAt( this.index + 1 ) match {
-                case Some(value) => {
-                    this.temp = this.index
-                    this.index += 1
-                    this.cursor = value
-                }
-                case None => finished = true
-            }
-        }
+        if( !this.isDone && this.index + 1 < this.elements.length ){
+            this.temp = this.index
+            this.index += 1
+            this.cursor = this.elements(this.index)
+        } else 
+            this.finished = true
     }
 
-    def isDone(): Boolean = this.finished
-    
+    //ATENÇÃO: Só dá por terminado o acesso à coleção, neste casso Array, quando chega ao último espaço livre
+    def isDone(): Boolean = this.finished 
+
 }

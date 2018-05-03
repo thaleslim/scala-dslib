@@ -51,7 +51,7 @@ class TestListIterator extends FlatSpec with Matchers with GivenWhenThen with Be
 
     cursor.currentIndex should not be (-1)
 
-    cursor.currentValue should be (1)
+    cursor.currentItem should be (1)
   }
   
 }

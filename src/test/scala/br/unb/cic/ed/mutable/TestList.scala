@@ -1,6 +1,7 @@
 package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.traits.List
+import br.unb.cic.ed.traits.Aggregate
 import br.unb.cic.ed.traits.Traversable
 import br.unb.cic.ed.ConcreteIterator._
 
@@ -16,12 +17,14 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
 
   behavior of "A List"
 
-  var list: Traversable[Int, ArrayListIterable[Int]] = _
-  var listAux: Traversable[Int, ArrayListIterable[Int]] = _
+  var list: List[Int] = _
+  var listAux: List[Int] = _
 
   before {
-    list = new br.unb.cic.ed.mutable.ArrayList[Int]()
-    listAux = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    //list = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    //listAux = new br.unb.cic.ed.mutable.ArrayList[Int](3)
+    list = new br.unb.cic.ed.mutable.LinkedList[Int]
+    listAux = new br.unb.cic.ed.mutable.LinkedList[Int]
   }
 
   it should "have size == 0 before inserting any element" in {
@@ -142,6 +145,33 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
     
   }
 
+  it should "remove all the elements after list.clear" in {
+    list(1,2,3,4,5,6,7,8,9)
+
+    list.size should be (9)
+    list.elementAt(4) should be (Some(5))
+
+    list.clear
+
+    list.size should be (0)
+    list.elementAt(0) should be (None)
+  }
+
+  it should "trade the list stored inside the class by the new one passed as a argument" in {
+    list(1,2,3,4,5,6,7,8,9)
+    list.size should be (9)
+
+    listAux(10,20,30)
+    listAux.size should be (3)
+
+    list.subst(listAux)
+    
+    list.size should be (3)
+    list.elementAt(0) should be (Some(10))
+    list.elementAt(1) should be (Some(20))
+    list.elementAt(2) should be (Some(30))
+  }
+
   it should "lead to a list [3,4,5,6,7,8] when we call [3, 4, 5].addAll([6, 7, 8])" in {
     list( 3, 4, 5 )
 
@@ -160,24 +190,24 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   }
 
   it should "lead to list [2,4,6] when we call [1,2,3].map(_*2)" in {
-    list( 1, 2, 3 )
-    list.map(_*2)
+    listAux( 1, 2, 3 )
+    listAux.map(_*2)
 
-    list.elementAt(0) should be (Some(2))
-    list.elementAt(1) should be (Some(4))
-    list.elementAt(2) should be (Some(6))
+    listAux.elementAt(0) should be (Some(2))
+    listAux.elementAt(1) should be (Some(4))
+    listAux.elementAt(2) should be (Some(6))
   }
 
   it should "return the string \"1 -> 2 -> 3 -> \" from [1,2,3].reduce[String]{ _ + _ + \" -> \"}(\"\")" in {
-    list( 1, 2, 3 )
+    listAux( 1, 2, 3 )
 
-    list.reduce[String]{ _ + _ + " -> " }("") should be ("1 -> 2 -> 3 -> ")
+    listAux.reduce[String]{ _ + _ + " -> " }("") should be ("1 -> 2 -> 3 -> ")
   }
 
   it should "return remove all values greater than 2 after the list.filter{if(_ < 3) true else false}" in {
-    list( 88, 10, 20, 77, 1, 2, 3 )
+    list( 88, 10, 20, 77, 1, 2, 30, 3, 44, 55)
     list.filter{x: Int => if( x < 3) true else false }
-
+    
     list.size should be (2)
     list.elementAt(0) should be (Some(1))
     list.elementAt(1) should be (Some(2))

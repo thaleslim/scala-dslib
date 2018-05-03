@@ -11,29 +11,27 @@ import br.unb.cic.ed.mutable.LinkedList
   * @author thaleslim
   */
 //TODO: comentar
-class LinkedListIterable[T <% Comparable[T]](private val list: LinkedList[T]) extends Iterator[NodeList[T]]{
+class LinkedListIterable[T <% Comparable[T]](private val head: NodeList[T]) extends Iterator[T]{
 
     private var cursor: NodeList[T] = null
     private var index: Int = -1
     private var temp: NodeList[T] = cursor
     private var finished: Boolean = false
 
-    def currentItem(): NodeList[T] = this.cursor
+    def currentItem(): T = this.cursor.value
 
-    def currentIndex(): Int = index
+    def currentIndex(): Int = this.index
 
-    def currentValue() = this.cursor.value
-
-    def first() = {
-        this.cursor = list.nodeAtPosition(0);
+    def first() = { 
+        this.cursor = head
         if( this.cursor != null )
-            index = 0
+            this.index = 0
         else
-            finished = true
+            this.finished = true
     }
 
     def previous(): Unit = {
-        if( this.temp != null ){
+        if( this.index > -1 && this.temp != null ){
             this.cursor = this.temp
             index -= 1
         }else

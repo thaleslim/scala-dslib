@@ -6,10 +6,10 @@ package br.unb.cic.ed.traits
   * 
   * @author thaleslim
   */
-//TODO: comentar && rever herança de Traversable <-> List
-trait Traversable[NodeType, IterableType]/* extends List[NodeType] with Aggregate[IterableType]*/{
+//TODO: comentar
+trait Traversable[NodeType]{
     def foreach[U](fun: NodeType => U): Unit
-    
+
     def size(): Int = {
         /* HUGE WARNING:
             Muito cuidado ao usar essa função: Altamente volátil

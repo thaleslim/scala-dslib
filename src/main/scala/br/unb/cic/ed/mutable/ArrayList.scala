@@ -11,8 +11,8 @@ import br.unb.cic.ed.ConcreteIterator.ArrayListIterable
   *
   * @author: rbonifacio
   */
-//TODO: comentar
-class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends Traversable[T, ArrayListIterable[T]]{
+//TODO: comentar & falar com professor sobre Iterator e ArrayList
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
@@ -47,11 +47,12 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
-  def elementAt(idx: Int): Option[T] = 
+  def elementAt(idx: Int): Option[T] = {
     if(idx >= 0 && idx < _size) //Usar o this.size aqui dá erro
         return Some(elements(idx))
     else
         return None
+  }
 
   def find(value: T): Option[Int] = {
     for(idx <- 0 until this.size) {
@@ -74,20 +75,11 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     }
   }
 
-  def clear(): Unit = {
-    var cursor = this.createIterator
-    
-    cursor.first
+  def clear(): Unit = while( this.size > 0 ) { this.remove( this.size - 1 ) }
 
-    while( !cursor ){
-        this.remove(cursor.currentIndex)
-        cursor.first
-    }
-  }
+  //override def size(): Int = _size
 
-  //def size(): Int = _size
-
-  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
+  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this.elements)
 
   def foreach[U](fun: T => U): Unit = {
     var cursor = this.createIterator
@@ -95,7 +87,7 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     cursor.first
 
     while( !cursor ){
-        fun(cursor.currentValue)
+        fun(cursor.currentItem)
         cursor.next
     }
 
@@ -103,18 +95,18 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
 
   def map(fun: T => T): ArrayList[T] = {
     var cursor = this.createIterator
-    var newlist = new ArrayList[T](this.max)
+    var that = new ArrayList[T](this.max)
 
     cursor.first
     
     while( !cursor ){
-        newlist.insert( newlist.size, fun(cursor.currentValue) )
+        that.insert( that.size, fun(cursor.currentItem) )
         cursor.next
     }
 
-    this.subst(newlist)
+    this.subst(that)
 
-    return newlist
+    return that
 
   }
 
@@ -125,7 +117,7 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     cursor.first
     
     while( !cursor ){
-        result = fun( result, cursor.currentValue )
+        result = fun( result, cursor.currentItem )
         cursor.next
     }
 
@@ -134,19 +126,19 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
 
   def filter(fun: T => Boolean): ArrayList[T] = {
     var cursor = this.createIterator
-    var newlist = new ArrayList[T](this.max)
+    var that = new ArrayList[T](this.max)
 
     cursor.first
     
     while( !cursor ){
-        if( fun(cursor.currentValue) )
-            newlist.insert(newlist.size,cursor.currentValue)
+        if( fun( cursor.currentItem ) )
+            that.insert( that.size, cursor.currentItem )
         cursor.next
     }
 
-    this.subst(newlist)
+    this.subst(that)
 
-    return newlist
+    return that
   }
 
 }
