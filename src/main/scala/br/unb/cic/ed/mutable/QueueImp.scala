@@ -1,5 +1,7 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits.List
+
 /**
   * Uma especificação do tipo fila
   * usando a construção trait da linguagem
@@ -8,7 +10,7 @@ package br.unb.cic.ed.mutable
   * @author mekamdan
   */
 
-class QueueImp[T] (private val elements: br.unb.cic.ed.mutable.List[T]) extends Queue[T]{
+class QueueImp[T <% Comparable[T]] (private val elements: List[T]) extends Queue[T]{
     private var _size = 0;
     private var _front = 0;
     
