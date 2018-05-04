@@ -1,46 +1,35 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits.List
+import br.unb.cic.ed.traits.Aggregate
+import br.unb.cic.ed.ConcreteIterators.ArrayListIterable
+
 /**
-  * Uma implementacao do tipo lista usando
-  * alocacao sequencial (um array de elementos).
+  * Uma implementação do tipo lista usando
+  * alocação sequencial (um array de elementos).
   *
   * @author: rbonifacio
   */
-class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
+
+class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
 
   private var _size = 0;
   private var elements = Array.ofDim[T](max)
 
-  def insert(pos: Int, value: T): Unit = {
-    if(pos >= 0 && pos <= _size && pos < max) {
-      if(pos == _size) {
-        elements(pos) = value
+  def insert(idx: Int, value: T): Unit = {
+    if(idx >= 0 && idx <= _size && idx < max) {
+      if(idx == _size) {
+        elements(idx) = value
       }
       else {
-        for(index <- (_size-1) to pos by -1){
+        for(index <- (_size-1) to idx by -1){
           elements(index + 1) = elements(index)
         }
-        elements(pos) = value
+        elements(idx) = value
       }
       _size += 1
     }
     else throw InvalidArgument("the first argument must be between 0 and size")
-  }
-
-  def elementAt(pos: Int): Option[T] = {
-    if(pos >= 0 && pos < _size) {
-      return Some(elements(pos))
-    }
-    return None
-  }
-
-  def find(value: T): Option[Int] = {
-    for(idx <- 0 until _size) {
-      if(value == elements(idx)) {
-        return Some(idx)
-      }
-    }
-    return None
   }
 
   def remove(pos: Int): Unit = {
@@ -55,9 +44,25 @@ class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
+  def elementAt(idx: Int): Option[T] = {
+    if(idx >= 0 && idx < _size) {
+      return Some(elements(idx))
+    }
+    return None
+  }
+
+  def find(value: T): Option[Int] = {
+    for(idx <- 0 until _size) {
+      if( value.compareTo(elements(idx)) == 0 ) {
+        return Some(idx)
+      }
+    }
+    return None
+  }
+
   def size(): Int = _size
 
-  def addAll[B <: T](values: List[B]): Unit = {
+  def addAll[B<:T](values: List[B]): Unit = {
     if(values.size() + _size > max) {
       throw new InvalidArgument("overflow!!!")
     }
@@ -69,5 +74,6 @@ class ArrayList[T: Manifest](private val max: Int = 10) extends List[T] {
       }
     }
   }
-
+  
+  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 }

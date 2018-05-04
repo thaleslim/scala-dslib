@@ -5,10 +5,6 @@ import org.scalatest.Matchers
 import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
-trait FG extends FiguraGeometrica with Comparable[FG] {
-   override def compareTo(that: FG) = this.area().compareTo(that.area())
-}
-
 class TestBinTree extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
   behavior of "A tree"
@@ -24,7 +20,7 @@ class TestBinTree extends FlatSpec with Matchers with GivenWhenThen with BeforeA
 
     bt.exist(3) should be (true)
   }
-
+/*
   it should "accept FGs " in {
     val bt: br.unb.cic.ed.mutable.BinTree[FG]  = new br.unb.cic.ed.mutable.BinTreeImpl[FG]()
 
@@ -38,5 +34,5 @@ class TestBinTree extends FlatSpec with Matchers with GivenWhenThen with BeforeA
     bt.exist(new Circulo(5) with FG) should be (true)
 
   }
-
+*/
 }

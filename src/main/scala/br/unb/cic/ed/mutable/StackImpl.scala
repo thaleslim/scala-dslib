@@ -1,12 +1,15 @@
 package br.unb.cic.ed.mutable
 
+import br.unb.cic.ed.traits.List
+
 /**
   * Uma implementacao do tipo pilha usando
   * alocacao sequencial (um array de elementos).
   *
   * @author: thaleslim / rbonifacio
   */
-class StackImpl[T](private val elements: br.unb.cic.ed.mutable.List[T]) extends Stack[T] {
+  
+class StackImpl[T <% Comparable[T]](private val elements: List[T]) extends Stack[T] {
 
   private var _size = 0
 

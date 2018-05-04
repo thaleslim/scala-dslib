@@ -55,7 +55,7 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
   }
 
   it should "throw InvalidArgument when we call push(1) on an full stack" in {
-    val smallStack = new br.unb.cic.ed.mutable.StackImpl[Int](new ArrayList[Int](1))
+    val smallStack = new br.unb.cic.ed.mutable.StackImpl[Int](new ArrayList[Int](1)) /*with Comparable[Integer]*/
 
     smallStack.push(1)
 
