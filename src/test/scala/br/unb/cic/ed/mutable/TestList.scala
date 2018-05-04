@@ -11,8 +11,6 @@ import org.scalatest.GivenWhenThen
 import org.scalatest.BeforeAndAfter
 
 
-/*TODO: expandir testes para novas funcionalidades implementadas: clear,
-        subst*/
 class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndAfter {
 
   behavior of "A List"
@@ -21,10 +19,13 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   var listAux: List[Int] = _
 
   before {
-    //list = new br.unb.cic.ed.mutable.ArrayList[Int]()
-    //listAux = new br.unb.cic.ed.mutable.ArrayList[Int](3)
+    /*
+    list = new br.unb.cic.ed.mutable.ArrayList[Int]()
+    listAux = new br.unb.cic.ed.mutable.ArrayList[Int](3)
+    */
     list = new br.unb.cic.ed.mutable.LinkedList[Int]
     listAux = new br.unb.cic.ed.mutable.LinkedList[Int]
+    /**/
   }
 
   it should "have size == 0 before inserting any element" in {

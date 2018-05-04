@@ -39,7 +39,7 @@ class LinkedListIterable[T <% Comparable[T]](private val head: NodeList[T]) exte
     }
 
     def next(): Unit = {
-        if( this.cursor != null && !this.isDone ){
+        if( this.cursor != null && this.cursor.next != null && !this.isDone ){
             this.temp = this.cursor
             this.cursor = this.cursor.next
             index += 1

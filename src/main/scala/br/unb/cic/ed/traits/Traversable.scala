@@ -11,9 +11,6 @@ trait Traversable[NodeType]{
     def foreach[U](fun: NodeType => U): Unit
 
     def size(): Int = {
-        /* HUGE WARNING:
-            Muito cuidado ao usar essa função: Altamente volátil
-         */
         var size = 0
         this.foreach[Int]{ x: NodeType => size += 1; size }
         return size

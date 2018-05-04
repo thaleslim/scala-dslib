@@ -24,11 +24,11 @@ package br.unb.cic.ed.traits
 */
 //TODO: comentar
 trait List[T] extends Traversable[T]{
-    def insert        (idx: Int, value: T) : Unit
-    def remove        (pos: Int)           : Unit
-    def elementAt     (idx: Int)           : Option[T]
-    def find          (value: T)           : Option[Int]
-    def addAll[B <: T](that: List[B])      : Unit
+    def insert        (idx: Int, value: T) : Unit           //Insere um valor: T na posição idx+1 da lista
+    def remove        (pos: Int)           : Unit           //Remove o valor presente no índice pos-1 da lista
+    def elementAt     (idx: Int)           : Option[T]      //Recebe um índice e retorna o valor listado correspondente ou None, caso não tenha sido encontrado
+    def find          (value: T)           : Option[Int]    //Busca por value: T e retorna seu índice correpondente na lista ou None, caso não tenha sido encontrado
+    def addAll[B <: T](that: List[B])      : Unit           //Concatena ao final da lista todos os elementos presentes em that
     def clear(): Unit
 
     //Substitue a lista atual por uma nova
