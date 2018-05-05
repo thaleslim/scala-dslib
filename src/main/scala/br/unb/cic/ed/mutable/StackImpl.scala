@@ -1,7 +1,5 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits.List
-
 /**
   * Uma implementacao do tipo pilha usando
   * alocacao sequencial (um array de elementos).

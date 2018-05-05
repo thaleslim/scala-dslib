@@ -1,4 +1,6 @@
-package br.unb.cic.ed.traits
+package br.unb.cic.ed.mutable
+
+import br.unb.cic.ed.design.Traversable
 
 /**
   * The definition of a List is based upon a structure that 

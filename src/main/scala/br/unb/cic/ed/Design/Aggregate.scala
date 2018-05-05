@@ -1,4 +1,4 @@
-package br.unb.cic.ed.traits
+package br.unb.cic.ed.design
 
 /**
   * Uma especifição de interface para interação

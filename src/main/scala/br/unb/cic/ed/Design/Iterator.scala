@@ -1,4 +1,4 @@
-package br.unb.cic.ed.traits
+package br.unb.cic.ed.design
 
 /**
   * Uma especifição do design Iterator, ou cursor,

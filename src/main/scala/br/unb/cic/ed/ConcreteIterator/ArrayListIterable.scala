@@ -1,6 +1,6 @@
 package br.unb.cic.ed.ConcreteIterator
 
-import br.unb.cic.ed.traits.Iterator
+import br.unb.cic.ed.design.Iterator
 import br.unb.cic.ed.mutable.ArrayList
 
 /**

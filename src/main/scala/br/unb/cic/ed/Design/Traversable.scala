@@ -1,4 +1,6 @@
-package br.unb.cic.ed.traits
+package br.unb.cic.ed.design
+
+import br.unb.cic.ed.mutable.List
 
 /**
   * Uma especificação do tipo traversable usando
@@ -19,4 +21,5 @@ trait Traversable[NodeType]{
     def map(fun: NodeType => NodeType): List[NodeType]
     def reduce[A](fun: (A,NodeType) => A)(start: A): A
     def filter(fun: NodeType => Boolean): List[NodeType]
+
 }

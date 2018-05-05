@@ -1,17 +1,15 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits.List
-import br.unb.cic.ed.traits.Aggregate
-import br.unb.cic.ed.traits.Traversable
+import br.unb.cic.ed.design.Aggregate
 import br.unb.cic.ed.ConcreteIterator.ArrayListIterable
 
 /**
-  * Uma implementação do tipo lista usando
-  * alocação sequencial (um array de elementos).
+  * A List implementation using sequential
+  * allocation (Array).
   *
   * @author rbonifacio / thaleslim
   */
-//TODO: comentar
+
 class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
 
   private var _size = 0

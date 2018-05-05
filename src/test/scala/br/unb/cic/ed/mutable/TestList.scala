@@ -1,8 +1,6 @@
 package br.unb.cic.ed.mutable
 
-import br.unb.cic.ed.traits.List
-import br.unb.cic.ed.traits.Aggregate
-import br.unb.cic.ed.traits.Traversable
+import br.unb.cic.ed.design.Aggregate
 import br.unb.cic.ed.ConcreteIterator._
 
 import org.scalatest.FlatSpec
