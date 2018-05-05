@@ -7,16 +7,25 @@ package br.unb.cic.ed.design
   * @author thaleslim
   */
 
-trait Iterator[Type]{
-    def currentItem(): Type   //O nó apontado do cursor
-    def currentIndex(): Int       //A posição atual do cursor
-    def first(): Unit             //Move o cursor para o início do Transversable
-    def previous(): Unit          //Move o cursor para o elemento anterior
-    def next(): Unit              //Move o cursor para o elemento seguinte
-    def isDone(): Boolean         //Verifica se chegou ao final do Transversable ou se está vazia
-
+trait Iterator[T]{
+    /** O nó apontado do cursor */
+    def currentItem(): T          
+    /** A posição atual do cursor */
+    def currentIndex(): Int
+    /** Move o cursor para o início do Transversable */
+    def first(): Unit
+    /** Move o cursor para o elemento anterior */
+    def previous(): Unit
+    /** Move o cursor para o elemento seguinte */
+    def next(): Unit
+    /** Verifica se chegou ao final do Transversable ou se está vazia */
+    def isDone(): Boolean
+    /**  */
     def apply(): Boolean = this.isDone()
+    /**  */
     def unary_!(): Boolean = !this.isDone()
+    /**  */
     def ++(): Unit = this.next()
+    /**  */
     def --(): Unit = this.previous()
 }

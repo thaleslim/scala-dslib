@@ -3,7 +3,10 @@ package br.unb.cic.ed.mutable
 import br.unb.cic.ed.design.Traversable
 
 /**
-  * The definition of a List is based upon a structure that 
+  * A List is container like structure; it has a 
+  * certain amount of storage space and holds a
+  * set of elements, being able to track their
+  * positions through a index. 
   * 
   * @author rbonifacio / thaleslim
   */

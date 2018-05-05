@@ -9,8 +9,12 @@ package br.unb.cic.ed.mutable
   */
 
 trait Stack[T] {
+  /**  */
   def push(value: T): Unit
+  /**  */
   def pop(): Option[T]
+  /**  */
   def top(): Option[T] 
+  /**  */
   def size(): Int
 }

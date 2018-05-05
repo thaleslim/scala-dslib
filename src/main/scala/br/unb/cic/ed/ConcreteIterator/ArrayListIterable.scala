@@ -9,7 +9,7 @@ import br.unb.cic.ed.mutable.ArrayList
   * 
   * @author thaleslim
   */
-//TODO: comentar
+
 class ArrayListIterable[T <% Comparable[T]](private val array: ArrayList[T]) extends Iterator[T]{
 
     private var cursor: T = _

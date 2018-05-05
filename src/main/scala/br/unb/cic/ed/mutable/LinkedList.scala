@@ -9,7 +9,7 @@ import br.unb.cic.ed.ConcreteIterator.LinkedListIterable
   * 
   * @author rbonifacio / thaleslim
   */
-//TODO: comentar
+
 case class NodeList[T](val value: T, var next: NodeList[T])
 
 class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIterable[T]]{

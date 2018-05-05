@@ -10,7 +10,7 @@ import br.unb.cic.ed.mutable.LinkedList
   * 
   * @author thaleslim
   */
-//TODO: comentar
+
 class LinkedListIterable[T <% Comparable[T]](private val head: NodeList[T]) extends Iterator[T]{
 
     private var cursor: NodeList[T] = null
