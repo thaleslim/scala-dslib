@@ -29,14 +29,14 @@ class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIt
     else throw br.unb.cic.ed.mutable.InvalidArgument("InvalidArgs: Out of Range")
   }
 
-  def remove(pos: Int): Unit = {
-    if(pos < 0 || pos >= this.size)
+  def remove(idx: Int): Unit = {
+    if(idx < 0 || idx >= this.size)
       throw br.unb.cic.ed.mutable.InvalidArgument("InvalidArgs: Out of Range")
     
-    if(pos == 0)
+    if(idx == 0)
       head = head.next
     else {
-      val node = nodeAtPosition(pos-1)
+      val node = nodeAtPosition(idx-1)
       node.next = node.next.next
     }
   }

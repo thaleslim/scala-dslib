@@ -7,8 +7,8 @@ package br.unb.cic.ed.traits
   * @author thaleslim
   */
 
-trait Iterator[NodeType]{
-    def currentItem(): NodeType   //O nó apontado do cursor
+trait Iterator[Type]{
+    def currentItem(): Type   //O nó apontado do cursor
     def currentIndex(): Int       //A posição atual do cursor
     def first(): Unit             //Move o cursor para o início do Transversable
     def previous(): Unit          //Move o cursor para o elemento anterior

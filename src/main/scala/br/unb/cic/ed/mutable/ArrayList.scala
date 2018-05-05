@@ -9,12 +9,12 @@ import br.unb.cic.ed.ConcreteIterator.ArrayListIterable
   * Uma implementação do tipo lista usando
   * alocação sequencial (um array de elementos).
   *
-  * @author: rbonifacio / thaleslim
+  * @author rbonifacio / thaleslim
   */
-//TODO: comentar & falar com professor sobre Iterator e ArrayList (comportamento peculiar)
+//TODO: comentar
 class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends List[T] with Aggregate[ArrayListIterable[T]]{
 
-  private var _size = 0;
+  private var _size = 0
   private var elements = Array.ofDim[T](max)
 
   def insert(idx: Int, value: T): Unit = {
@@ -34,11 +34,11 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
     else throw InvalidArgument("the first argument must be between 0 and size")
   }
 
-  def remove(pos: Int): Unit = {
+  def remove(idx: Int): Unit = {
     var size = this.size 
-    if(pos >= 0 && pos < size) {
-      if(pos != size-1){
-        for(index <- pos until (size-1)){
+    if(idx >= 0 && idx < size) {
+      if(idx != size-1){
+        for(index <- idx until (size-1)){
           elements(index) = elements(index+1)
         }
       }
@@ -77,14 +77,9 @@ class ArrayList[T <% Comparable[T]: Manifest](private val max: Int = 10) extends
 
   def clear(): Unit = while( this.size > 0 ) { this.remove( this.size - 1 ) }
 
-  private def generateArray(): Array[T] = {
-    var that = Array.ofDim[T](this._size)
-    for( index <- 0 until this._size )
-        that(index) = this.elements(index)
-    return that
-  }
+  override def size(): Int = _size
 
-  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this.generateArray)
+  def createIterator(): ArrayListIterable[T] = return new ArrayListIterable[T](this)
 
   def foreach[U](fun: T => U): Unit = {
     var cursor = this.createIterator

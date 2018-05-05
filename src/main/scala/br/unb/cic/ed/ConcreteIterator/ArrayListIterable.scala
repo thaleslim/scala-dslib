@@ -10,7 +10,7 @@ import br.unb.cic.ed.mutable.ArrayList
   * @author thaleslim
   */
 //TODO: comentar
-class ArrayListIterable[T <% Comparable[T]](private val elements: Array[T]) extends Iterator[T]{
+class ArrayListIterable[T <% Comparable[T]](private val array: ArrayList[T]) extends Iterator[T]{
 
     private var cursor: T = _
     private var index: Int = -1
@@ -21,31 +21,27 @@ class ArrayListIterable[T <% Comparable[T]](private val elements: Array[T]) exte
 
     def currentIndex(): Int = this.index
 
-    def first() = { 
-        if( this.elements.length > 0){
-            this.cursor = this.elements(0)
-            this.index = 0
-        }else 
-            this.finished = true
+    def first() = {
+        array.elementAt(0) match {
+            case Some(value) => { this.cursor = value; this.index = 0}
+            case None => this.finished = true
+        }
     }
-
+    
     def previous(): Unit = {
-        if( this.temp > 0 ) {
-            this.cursor = elements(this.temp); this.index = this.temp; this.temp -= 1
-        }else
-            this.finished = true
+        array.elementAt(this.temp) match {
+            case Some(value) => { this.cursor = value; this.index = this.temp; this.temp -= 1 }
+            case None => { this.finished = true }
+        }
     }
 
     def next(): Unit = {
-        if( !this.isDone && this.index + 1 < this.elements.length ){
-            this.temp = this.index
-            this.index += 1
-            this.cursor = this.elements(this.index)
-        } else 
-            this.finished = true
+        if( !this.isDone ) array.elementAt(this.index + 1) match {
+            case Some(value) => { this.cursor = value; this.temp = this.index; this.index += 1 }
+            case None => { this.finished = true }
+        }
     }
 
-    //ATENÇÃO: Só dá por terminado o acesso à coleção, neste casso Array, quando chega ao último espaço livre
     def isDone(): Boolean = this.finished 
 
 }

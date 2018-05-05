@@ -19,13 +19,13 @@ class TestList extends FlatSpec with Matchers with GivenWhenThen with BeforeAndA
   var listAux: List[Int] = _
 
   before {
-    /*
+    /**/
     list = new br.unb.cic.ed.mutable.ArrayList[Int]()
     listAux = new br.unb.cic.ed.mutable.ArrayList[Int](3)
-    */
+    /*
     list = new br.unb.cic.ed.mutable.LinkedList[Int]
     listAux = new br.unb.cic.ed.mutable.LinkedList[Int]
-    /**/
+    */
   }
 
   it should "have size == 0 before inserting any element" in {

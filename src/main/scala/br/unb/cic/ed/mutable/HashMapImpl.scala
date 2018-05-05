@@ -4,7 +4,7 @@ package br.unb.cic.ed.mutable
   * Uma implementação do tipo Hash Map usando
   * alocacao sequencial (um array de elementos).
   *
-  * @author: thaleslim
+  * @author thaleslim
   */
 
 case class HashMapElement[A <: Comparable[A], B](var key: A, var value: B){

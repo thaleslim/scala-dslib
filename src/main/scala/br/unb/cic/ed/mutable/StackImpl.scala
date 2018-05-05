@@ -6,7 +6,7 @@ import br.unb.cic.ed.traits.List
   * Uma implementacao do tipo pilha usando
   * alocacao sequencial (um array de elementos).
   *
-  * @author: thaleslim / rbonifacio
+  * @author thaleslim / rbonifacio
   */
   
 class StackImpl[T <% Comparable[T]](private val elements: List[T]) extends Stack[T] {
