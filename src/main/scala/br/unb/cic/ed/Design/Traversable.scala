@@ -3,6 +3,9 @@ package br.unb.cic.ed.design
 import br.unb.cic.ed.mutable.List
 
 /**
+  *Interface para detectar se uma classe é percorrível utilizando o foreach
+  *Interface básica abstrata que não pode ser implementa sozinha 
+  *Ao invés, deve ser implementada as interfaces IteratorAggregate ou Iterator
   * Uma especificação do tipo traversable usando
   * a construção trait da linguagem Scala. 
   * 

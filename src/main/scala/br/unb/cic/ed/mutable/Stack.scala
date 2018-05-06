@@ -1,6 +1,9 @@
 package br.unb.cic.ed.mutable
 
 /**
+  * Stack é uma estrutura de dados linear 
+  * que segue uma ordem particular onde
+  * as operações são realizadas (Last in First Out)
   * Uma especificação do tipo pilha
   * usando a construção trait da linguagem
   * Scala.
