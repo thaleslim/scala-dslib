@@ -9,16 +9,16 @@ package br.unb.cic.ed.mutable
   */
 
 trait HashMap[A <: Comparable[A],B]{
-    /** Altera a função default de hash */
+    /** Sets a new default hashCode */
     def apply(newHash: A => Int): Unit
-    /** Busca por um valor no Hash Map baseado em uma chave */
+    /** Searches for a value inside this based on its key */
     def apply(key: A): Option[B]
-    /** Insere um valor no Hash Map vinculando-o a uma chave, usar operador -> ou uma Tupla */
+    /** Inserts a value in this, creating a bond to a key */
     def apply(pair: Tuple2[A,B]): Unit
-    /** Insere uma sequência de Tuplas no Hash Map */
+    /** Inserts a Tuple2[A,B] sequence in this */
     def apply(values: Tuple2[A,B]*): Unit
-    /** Remove um valor do Hash Map */
+    /** Removes a value from this */
     def - (key: A): Unit
-    /** Remove uma sequência de valores do Hash Map */
+    /** Removes a value sequence from this */
     def - (keys: A*): Unit
 }

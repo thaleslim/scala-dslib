@@ -9,12 +9,12 @@ package br.unb.cic.ed.mutable
   */
 
 trait Stack[T] {
-  /**  */
+  /** Pushes a value in this */
   def push(value: T): Unit
-  /**  */
+  /** Pops a value from this */
   def pop(): Option[T]
-  /**  */
+  /** Returns the value at this' top */
   def top(): Option[T] 
-  /**  */
+  /** Returns the amount of values stacked */
   def size(): Int
 }

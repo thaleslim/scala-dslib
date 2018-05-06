@@ -9,8 +9,12 @@ package br.unb.cic.ed.mutable
   */
   
 trait Queue[T] {
+    /**  */
     def enqueue(value:T) : Unit
+    /**  */
     def dequeue (): Option[T]
+    /**  */
     def First() : Option[T]
+    /**  */
     def size(): Int
 }
