@@ -8,24 +8,24 @@ package br.unb.cic.ed.design
   */
 
 trait Iterator[T]{
-    /** O nó apontado do cursor */
+    /** Gets the value inside this */
     def currentItem(): T          
-    /** A posição atual do cursor */
+    /** Gets this current position */
     def currentIndex(): Int
-    /** Move o cursor para o início do Transversable */
+    /** Sets this to the Container' beginning */
     def first(): Unit
-    /** Move o cursor para o elemento anterior */
+    /** Sets this to the element previously acessed */
     def previous(): Unit
-    /** Move o cursor para o elemento seguinte */
+    /** Sets this to the next element in the container */
     def next(): Unit
-    /** Verifica se chegou ao final do Transversable ou se está vazia */
+    /** Checks if has already reached the end or if the container is empty */
     def isDone(): Boolean
-    /**  */
+    /** Alternative to this.isDone */
     def apply(): Boolean = this.isDone()
-    /**  */
+    /** Alternative to !(this.isDone) */
     def unary_!(): Boolean = !this.isDone()
-    /**  */
+    /** Alternative to this.next */
     def ++(): Unit = this.next()
-    /**  */
+    /** Alternative to this.previous */
     def --(): Unit = this.previous()
 }
