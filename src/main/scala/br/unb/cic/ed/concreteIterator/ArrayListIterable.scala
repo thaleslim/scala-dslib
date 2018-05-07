@@ -28,12 +28,13 @@ class ArrayListIterable[T <% Comparable[T]](private val array: ArrayList[T]) ext
         }
     }
     
-    def previous(): Unit = {
-        array.elementAt(this.temp) match {
-            case Some(value) => { this.cursor = value; this.index = this.temp; this.temp -= 1 }
-            case None => { this.finished = true }
-        }
-    }
+    // NOTE: implement previous another day
+    // def previous(): Unit = {
+    //     array.elementAt(this.temp) match {
+    //         case Some(value) => { this.cursor = value; this.index = this.temp; this.temp -= 1 }
+    //         case None => { this.finished = true }
+    //     }
+    // }
 
     def next(): Unit = {
         if( !this.isDone ) array.elementAt(this.index + 1) match {

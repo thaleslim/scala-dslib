@@ -15,8 +15,6 @@ trait Iterator[T]{
     def currentIndex(): Int
     /** Sets this to the Container' beginning */
     def first(): Unit
-    /** Sets this to the element previously acessed */
-    def previous(): Unit
     /** Sets this to the next element in the container */
     def next(): Unit
     /** Checks if has already reached the end or if the container is empty */
@@ -25,8 +23,4 @@ trait Iterator[T]{
     def apply(): Boolean = this.isDone()
     /** Alternative to !(this.isDone) */
     def unary_!(): Boolean = !this.isDone()
-    /** Alternative to this.next */
-    def ++(): Unit = this.next()
-    /** Alternative to this.previous */
-    def --(): Unit = this.previous()
 }

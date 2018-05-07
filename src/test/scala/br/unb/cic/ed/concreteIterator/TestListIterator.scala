@@ -32,11 +32,7 @@ class TestListIterator extends FlatSpec with Matchers with GivenWhenThen with Be
 
     cursor.currentIndex should be (-1)
 
-    cursor++
-
-    cursor.currentIndex should be (-1)
-
-    cursor--
+    cursor.next
 
     cursor.currentIndex should be (-1)
   }

@@ -29,14 +29,15 @@ class LinkedListIterable[T <% Comparable[T]](private val head: NodeList[T]) exte
         else
             this.finished = true
     }
-    //TODO: fix previous (só funciona uma vez)
-    def previous(): Unit = {
-        if( this.index > -1 && this.temp != null ){
-            this.cursor = this.temp
-            index -= 1
-        }else
-            finished = true
-    }
+    
+    // NOTE: fix previous (só funciona uma vez)
+    // def previous(): Unit = {
+    //     if( this.index > -1 && this.temp != null ){
+    //         this.cursor = this.temp
+    //         index -= 1
+    //     }else
+    //         finished = true
+    // }
 
     def next(): Unit = {
         if( this.cursor != null && this.cursor.next != null && !this.isDone ){

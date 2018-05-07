@@ -17,17 +17,20 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
   }
 
   it should "have size == 0 before stacking any element" in {
-    stack.size() should be (0)
+    stack.size should be (0)
   }
 
   it should "have size == 3 after stacking 3 elements" in {
-    stack.size() should be (0)
-
+    stack.size should be (0)
+    
+    stack(3,2,1)
+    /*
     stack.push(3)
     stack.push(2)
     stack.push(1)
-
-    stack.size() should be (3)
+    */
+    
+    stack.size should be (3)
   }
 
   it should "return Some(10) after stacking the following elements: 30,20,10; and popping once" in {
