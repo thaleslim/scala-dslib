@@ -16,7 +16,8 @@ case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 /**
   * Companion Object do trait List: mais um idioma da linguagem Scala  
-  * Um companion object precisa ser declarado no mesmo arquivo fonte 
+  * 
+    Um companion object precisa ser declarado no mesmo arquivo fonte 
   * que a classe / trait base (no caso, o trait List) e permite definir 
   * metodos uteis para manipular / instanciar objetos da classe / trait base. 
   * 

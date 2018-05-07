@@ -3,9 +3,11 @@ package br.unb.cic.ed.design
 import br.unb.cic.ed.mutable.List
 
 /**
-  * Interface para detectar se uma classe é percorrível utilizando o foreach
-  * Interface básica abstrata que não pode ser implementa sozinha 
-  * Ao invés, deve ser implementada as interfaces IteratorAggregate ou Iterator 
+  * Interface to define a traversable class.
+  * 
+    Needs the method  ``` def foreach[U](fun: Elem => U): Unit ``` in which 
+  * Elem corresponds to the container elements' type; to return things like
+  * the cointainer' size   
   * 
   * @author thaleslim
   */
@@ -19,11 +21,23 @@ trait Traversable[T]{
         this.foreach[Int]{ x: T => size += 1; size }
         return size
     }
-    /** Returns a new container that, in every position, holds the result from applying a function to the this' element from the same position */
+    /** Generates a container that holds the result from applying a method to this' elements.
+      * 
+        In other words, applies fun to every position of a container:
+        - case true => Appends to result container
+        - case false => Nothing or, in a mutable environment, removes this' element
+      * @return new container holding the results
+      */
     def map(fun: T => T): List[T]
-    /** Applies a function foreach value of the container to reduce it to a single value */
+    /** Applies a function foreach value of the container to reduce it to a single value. */
     def reduce[A](fun: (A,T) => A)(start: A): A
-    /** Returns a new container that holds every this' element to witch a boolean function returned true when applied */
+    /** Generates a container that holds the result from applying a filter to this' elements.
+      * 
+        In other words, applies fun to every position of a container:
+        - case true => Appends to result container
+        - case false => Nothing or, in a mutable environment, removes this' element
+      * @return new container holding the results
+      */
     def filter(fun: T => Boolean): List[T]
 
 }
