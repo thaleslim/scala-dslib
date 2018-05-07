@@ -2,8 +2,8 @@ package br.unb.cic.ed.mutable
 
 /**
   * A Stack is a linear data structure that follows 
-  * a strict order to execute its operations (Last
-  * in First Out).
+  * a strict order to execute its operations: LIFO (Last
+  * In First Out).
   *
   * @author thaleslim
   */

@@ -1,11 +1,19 @@
 package br.unb.cic.ed.mutable
 
-/**Arvore binaria é uma estrutura de dados caracterizada por: Ou não tem elemento algum (árvore vazia). Ou tem um      *elemento distinto, denominado raiz, com dois apontamentos para duas estruturas diferentes, denominadas sub-árvore *esquerda e sub-árvore direita.
-**/
+/**
+  * A Binary Tree is a hierarchy based data structure 
+  * divided in nodes; a Tree could:
+   - Have 0 nodes (Empty Tree); or
+   - Have 1 node, the Tree' root.
+  *
+   The root is composed by a value, alongside with the 
+   address' to 2 other nodes, that can be seen as 
+   2 other independent Binary Trees.
+  */
 
 trait BinTree[T <: Comparable[T]] {
-  /**Insere um elemento na arvore Binaria**/
+  /** Inserts a value in this */
   def insert(value : T): Unit
-  /**Checa se um elemento esta inserido na arvore binaria**/
+  /** Searchs for a value in this */
   def exist(value: T): Boolean
 }

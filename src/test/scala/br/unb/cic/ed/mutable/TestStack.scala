@@ -24,37 +24,26 @@ class TestStack extends FlatSpec with Matchers with GivenWhenThen with BeforeAnd
     stack.size should be (0)
     
     stack(3,2,1)
-    /*
-    stack.push(3)
-    stack.push(2)
-    stack.push(1)
-    */
-    
+
     stack.size should be (3)
   }
 
   it should "return Some(10) after stacking the following elements: 30,20,10; and popping once" in {
-    stack.size() should be (0)
+    stack.size should be (0)
 
-    stack.push(30)
-    stack.push(20)
-    stack.push(10)
+    stack(30,20,10)
+    stack.size should be (3)
 
-    stack.size() should be (3)
+    stack.pop should be (Some(10))
+    stack.size should be (2)
+    stack.pop should be (Some(20))
+    stack.pop should be (Some(30))
 
-    stack.pop() should be (Some(10))
-
-    stack.size() should be (2)
-
-    stack.pop() should be (Some(20))
-    stack.pop() should be (Some(30))
-
-    stack.size() should be (0) 
+    stack.size should be (0) 
   }
 
-
   it should "should return None when we call pop() on an empty stack" in {
-    stack.pop() should be (None)
+    stack.pop should be (None)
   }
 
   it should "throw InvalidArgument when we call push(1) on an full stack" in {
