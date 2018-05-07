@@ -1,7 +1,7 @@
 package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.design.Aggregate
-import br.unb.cic.ed.ConcreteIterator._
+import br.unb.cic.ed.concreteIterator._
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers

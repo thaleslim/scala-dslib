@@ -1,7 +1,7 @@
 package br.unb.cic.ed.mutable
 
 import br.unb.cic.ed.design.Aggregate
-import br.unb.cic.ed.ConcreteIterator.ArrayListIterable
+import br.unb.cic.ed.concreteIterator.ArrayListIterable
 
 /**
   * A List implementation using sequential
