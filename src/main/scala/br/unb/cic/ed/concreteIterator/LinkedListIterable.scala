@@ -5,9 +5,9 @@ import br.unb.cic.ed.mutable.NodeList
 import br.unb.cic.ed.mutable.LinkedList
 
 /**
-  * Uma implementação do tipo iterator baseado
-  * em uma Lista encadeada e NodeList.
+  * A Concrete Iterator implemented to a Linked List composed by nodes.
   * 
+    @see [[br.unb.cic.ed.mutable.LinkedList]] [[br.unb.cic.ed.mutable.NodeList]]
   * @author thaleslim
   */
 
@@ -30,7 +30,7 @@ class LinkedListIterable[T <% Comparable[T]](private val head: NodeList[T]) exte
             this.finished = true
     }
     
-    // NOTE: fix previous (só funciona uma vez)
+    // NOTE: implement previous some other day
     // def previous(): Unit = {
     //     if( this.index > -1 && this.temp != null ){
     //         this.cursor = this.temp

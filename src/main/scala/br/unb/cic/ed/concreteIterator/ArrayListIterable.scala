@@ -4,9 +4,9 @@ import br.unb.cic.ed.design.Iterator
 import br.unb.cic.ed.mutable.ArrayList
 
 /**
-  * Uma implementação do tipo iterator baseado
-  * em uma Lista sequencial.
+  * A Concrete Iterator implemented to a Sequencially Allocated(Array) List.
   * 
+    @see [[br.unb.cic.ed.mutable.ArrayList]]
   * @author thaleslim
   */
 

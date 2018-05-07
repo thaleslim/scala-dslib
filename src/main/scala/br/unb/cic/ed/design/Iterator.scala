@@ -1,10 +1,11 @@
 package br.unb.cic.ed.design
 
 /**
-  * um iterador se refere tanto ao objeto que permite ao programador
-  * percorrer um container, (uma coleção de elementos) particularmente
-  * listas, quanto ao padrão de projetos Iterator, no qual um iterador
-  * é usado para percorrer um container e acessar seus elementos. 
+  * A Iterador is a object that allows a client to traverse through container (a collection of elements).
+  *
+    This is usefull specially with linear or hierarchy based containers; also the name Iterator
+  * could refer the design as a whole including the Aggregate interface the concrete iterators.
+  * @see [[Aggregate]] [[concreteIterator]]
   * 
   * @author thaleslim
   */
