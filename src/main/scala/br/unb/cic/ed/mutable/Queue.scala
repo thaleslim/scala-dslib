@@ -14,6 +14,6 @@ trait Queue[T] {
     def dequeue (): Option[T]
     /** Checks the value at this' head without removing it */
     def First() : Option[T]
-    /** Returns the amount of values enqueued **/
+    /** Returns the amount of values enqueued */
     def size(): Int
 }

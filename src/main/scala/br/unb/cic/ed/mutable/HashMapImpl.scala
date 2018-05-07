@@ -1,29 +1,41 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma implementação do tipo Hash Map usando
-  * alocacao sequencial (um array de elementos).
+  * The ArrayHashMap' abstract element, a representation
+  * that allows it's bijective behaviour.
   *
-  * @author thaleslim
+    This' behaviour could be described as: Every key,
+  * if previously inserted, will have one, and only one,
+  * value associated.
+  *
+    @see [[ArrayHashMap]]
+  * @author rbonifacio / thaleslim 
   */
 
 case class HashMapElement[A <: Comparable[A], B](var key: A, var value: B){
+    /** Compares if a key is associated with this.value */
     def equalTo (key: A): Boolean = if( key.compareTo(this.key) == 0 ) true else false
 }
+
+/**
+  * A trait HashMap' implementation using 
+  * sequential allocation (Array).
+  *
+  * @author thaleslim
+  */
 
 class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) extends HashMap[A,B]{
 
     private var elements = Array.ofDim[HashMapElement[A,B]](max)
     private var default_hash: A => Int = ( _.hashCode() )
 
+    /** 
+      * Uses a quadratic function to generate a index and checks
+      * if inside this elements array at index position has a 
+      * empty space.
+      * @return free space' index or, if doesn't find any, -1 
+      */
     private def sondagem_quadratica(start: Int): Int = {
-        /* Uses a quadratic function to generate a index and checks
-         * if in that generated index inside the elements array has
-         * a empty space.
-         * @return Returns the empty space' index or, if doesn't find
-         * any free spaces, -1 
-         */
-
         var index = start
         var contador = 1
         
@@ -32,14 +44,12 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
         
         if( index < max && this.elements(index) == null ) index else -1
     }
-
+    /** 
+      * Runs through every index of this elements array, 
+      * searching for a empty space.
+      * @return free space' index or, if doesn't find any, -1
+      */
     private def sondagem_linear(start: Int): Int = {
-        /* Runs through every index of the elements, searching
-         * for a empty space
-         * @return Returns the empty space' index or, if doesn't find
-         * any free spaces, -1 
-         */
-
         var index = start
         var found: Boolean = false
 
@@ -57,21 +67,23 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
         
         if( found ) return index else return -1
     }
-
+    /**
+      * Selects a valid position for inserting a value:
+      *
+        - First Step: attemps using the hash method to find the index,
+      * if that fails in pointing to a empty space proceeds;
+      *
+        - Second Step: attemps to use the index generated in the last
+      * step with a quadratic function, that generates some empty
+      * gaps between the values, but if that fails as a last resort
+      * we proceed to the last step;
+      *
+        - Third Step: Runs through the entire array searching for
+      * a empty space.
+      *
+      * @return free space' index or, if doesn't find any, -1 
+      */
     private def get_position(key: A): Int = {
-        /* Responsible for selecting a valid position for insertion
-         * First Step: attemps using the hash method to find the index,
-         * if that fails in pointing to a empty space proceeds
-         * Second Step: attemps to use the index generated in the last
-         * step with a quadratic function, that generates some empty
-         * gaps between the values, but if that fails as a last resort
-         * we proceed to the last step
-         * Third Step: Runs through the entire array searching for
-         * a empty space
-         * @return Returns the empty space' index or, if doesn't find
-         * any free spaces, -1 
-         */
-
         var index: Int = this.default_hash(key) % max
 
 
@@ -89,27 +101,25 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
         
         return -1
     }
-
+    /**
+      * Inserts a new value.
+      * @throws InvalidArgument if this has reached it's storage limit.
+      */
     private def insert(key: A, value: B): Unit = {
-        /* Responsible for inserting a new element to the structure
-         * Throws a exception if the structure has reached it's storage limit
-         */
-
         var index = get_position(key)
         if( index >= 0 )
             this.elements(index) = HashMapElement[A,B](key,value)
         else throw br.unb.cic.ed.mutable.InvalidArgument("Maximum Capacity Reached")
     }
-
+    /** 
+      * Helps this.search to locate a value in this. Usefull in cases where's a collision.
+      *
+      * @param start Usually the result from the hashing method, it's used as the
+      * starting position for the search.
+      * @param key The acess key to the value being searched.
+      * @return value' index or -1 if doesn't find the corresponding value.
+      */
     private def locate(start: Int, key: A): Int = {
-        /* Responsible for auxiliating this.search in the process of locating the value
-         * Usefull in cases where's a collision
-         * @param start: Usually the result from the hashing method, it's used as the
-         * starting position of the search process
-         * @param key: The acess key to the value being searched
-         * @return Returns the value' index or -1 if doesn't find the corresponding value
-         */
-
         var index = start
         var found: Boolean = false
 
@@ -128,13 +138,11 @@ class ArrayHashMap[A <: Comparable[A], B: Manifest](private val max: Int = 10) e
 
         if( found ) return index else return -1
     }
-    
+    /** 
+      * Searches for the values based on their respective keys.
+      * @return None if doesn't find the corresponding value.
+      */
     private def search(key: A): Option[B] = {
-        /* Responsible for searching for the values based on their respective keys
-         * Interacts with the user through the apply method
-         * @returns None if does'nt find the corresponding value
-         */
-
         if( max == 0 ) None
         var index = this.default_hash(key) % max
         if( index > -1 && index < max && this.elements(index) != null ){

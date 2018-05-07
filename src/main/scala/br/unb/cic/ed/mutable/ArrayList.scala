@@ -4,7 +4,7 @@ import br.unb.cic.ed.design.Aggregate
 import br.unb.cic.ed.concreteIterator.ArrayListIterable
 
 /**
-  * A List implementation using sequential
+  * A trait List' implementation using sequential
   * allocation (Array).
   *
   * @author rbonifacio / thaleslim

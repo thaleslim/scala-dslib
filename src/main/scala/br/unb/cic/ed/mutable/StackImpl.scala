@@ -1,9 +1,9 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma implementacao do tipo pilha usando
-  * alocacao sequencial (um array de elementos).
+  * A trait Stack' implementation based on trait List.
   *
+    @see [[List]]
   * @author thaleslim / rbonifacio
   */
   

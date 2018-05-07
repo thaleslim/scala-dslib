@@ -1,10 +1,9 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Uma especificação do tipo fila
-  * usando a construção trait da linguagem
-  * Scala.
-  * 
+  * A trait Queue' implementation based on trait List.
+  *
+    @see [[List]]
   * @author mekamdan
   */
 

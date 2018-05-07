@@ -4,13 +4,25 @@ import br.unb.cic.ed.design.Aggregate
 import br.unb.cic.ed.concreteIterator.LinkedListIterable
 
 /**
-  * Uma implementação do tipo lista usando
-  * encadeamento.
-  * 
-  * @author rbonifacio / thaleslim
+  * The Linked List' abstract element, a representation
+  * that allows it's linear behaviour.
+  *
+    @see [[LinkedList]]
+  * @author rbonifacio / thaleslim 
   */
 
 case class NodeList[T](val value: T, var next: NodeList[T])
+
+/**
+  * A trait List' implementation using a group of nodes.
+  * 
+    This' nodes are capable of pointing to the next index,
+  * which together represent a sequence. The trait List' 
+  * linearity is given by this behaviour instead of the 
+  * node' physical placement.
+  * 
+  * @author rbonifacio / thaleslim
+  */
 
 class LinkedList[T <% Comparable[T]] extends List[T] with Aggregate[LinkedListIterable[T]]{
 

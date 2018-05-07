@@ -3,10 +3,11 @@ package br.unb.cic.ed.mutable
 import br.unb.cic.ed.design.Traversable
 
 /**
-  * A List is container like structure; it has a 
-  * certain amount of storage space and holds a
+  * A List is a linear container like data structure divided in elements.
+  *
+    This has a certain amount of storage space and holds a
   * set of elements, being able to track their
-  * positions through a index. 
+  * positions through a index.
   * 
   * @author rbonifacio / thaleslim
   */

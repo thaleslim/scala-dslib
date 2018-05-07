@@ -1,13 +1,10 @@
 package br.unb.cic.ed.mutable
 
 /**
-  * Hash map é uma estrutura de dados
-  * que associa chaves de pesquisa a valores
-  * Seu objetivo é,a partir de uma chave simples,
-  * fazer uma busca rápida e obter o valor desejado
-  * Uma especifição do tipo Hash Map
-  * usando a construção trait da linguagem 
-  * Scala. 
+  * A Hash Map is a data structure that associates access keys to specific values.
+  *
+    This' goal is, based on access keys, make the fastest search possible for a value, in terms of algorithm
+  * complexity.
   * 
   * @author thaleslim
   */

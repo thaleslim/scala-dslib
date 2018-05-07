@@ -1,5 +1,13 @@
 package br.unb.cic.ed.mutable
 
+/**
+  * The BinTree' abstract node, a representation
+  * that allows it's hierarchy behaviour.
+  *
+    @see [[BinTreeImpl]]
+  * @author rbonifacio
+  */
+
 class NodeTree[T <: Comparable[T]](val content: T, var lhs: NodeTree[T] = null, var rhs: NodeTree[T] = null) {
 
   def insert(v: T) {
@@ -21,6 +29,12 @@ class NodeTree[T <: Comparable[T]](val content: T, var lhs: NodeTree[T] = null, 
     else false 
 }
 
+/**
+  * A trait BinTree' implementation using 
+  * linked nodes.
+  *
+  * @author rbonifacio
+  */
 
 class BinTreeImpl[T <: Comparable[T]] extends BinTree[T] {
   var root: NodeTree[T] = null
